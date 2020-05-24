@@ -1,7 +1,4 @@
-package Battleships;
-
-import java.util.ArrayList;
-
+package battleships;
 
 public class Square {
 

@@ -1,4 +1,4 @@
-package Battleships;
+package battleships;
 
 import java.util.ArrayList;
 
