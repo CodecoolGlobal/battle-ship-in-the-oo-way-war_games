@@ -1,3 +1,4 @@
+package Battleships;
 
 public class Ship {
 
