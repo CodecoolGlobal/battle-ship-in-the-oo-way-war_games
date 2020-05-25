@@ -1,10 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
 
-import battleships.Ocean;
-import battleships.Ship;
-import battleships.View;
-
 public class Main {
 
     public static void main(String[] args) {
