@@ -18,13 +18,26 @@ public class Ocean {
         }
     }
 
-    public void addShip(Ship ship, int vertical, int horizontal){
-        if (ship.getdirection().equals("up")){
+    public void addShip(Ship ship, int x, int y){
+        if (ship.getdirection().equals("vertical")) {
+            for (int i = 0; i<ship.getlength(); i++) {
+                this.map.get(x + i).get(y).setShip(ship);
+            }
+        }
+        else {
             for (int i = 0; i<ship.getlength(); i++){
-                this.map.get(vertical - i).get(horizontal).setShip(ship);
+                this.map.get(x ).get(y + i).setShip(ship);
             }
         }
     }
+
+    // public void addShip(Ship ship, int vertical, int horizontal){
+    //     if (ship.getdirection().equals("up")){
+    //         for (int i = 0; i<ship.getlength(); i++){
+    //             this.map.get(vertical - i).get(horizontal).setShip(ship);
+    //         }
+    //     }
+    // }
 
     public ArrayList<ArrayList<Square>> getMap(){
         return this.map;
