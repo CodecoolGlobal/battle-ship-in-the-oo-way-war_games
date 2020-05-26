@@ -29,7 +29,7 @@ public class Main {
         int lengthInt = Integer.parseInt(length);
 
         
-        ships.add(new Ship(lengthInt, location));
+        ships.add(new Ship(lengthInt, location, "Destroyer"));
         ocean.addShip(ships.get(0), x_coord, y_coord);
         view.displayBoard(ocean.getMap());
     }
