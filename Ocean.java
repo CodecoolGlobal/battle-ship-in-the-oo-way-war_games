@@ -19,25 +19,50 @@ public class Ocean {
     }
 
     public void addShip(Ship ship, int x, int y){
-        if (ship.getdirection().equals("vertical")) {
-            for (int i = 0; i<ship.getlength(); i++) {
+        if (ship.getPosition().equals("vertical")) {
+            for (int i = 0; i<ship.getLength(); i++) {
                 this.map.get(x + i).get(y).setShip(ship);
             }
         }
         else {
-            for (int i = 0; i<ship.getlength(); i++){
-                this.map.get(x ).get(y + i).setShip(ship);
+            for (int i = 0; i<ship.getLength(); i++){
+                this.map.get(x).get(y + i).setShip(ship);
             }
         }
     }
 
-    // public void addShip(Ship ship, int vertical, int horizontal){
-    //     if (ship.getdirection().equals("up")){
-    //         for (int i = 0; i<ship.getlength(); i++){
-    //             this.map.get(vertical - i).get(horizontal).setShip(ship);
-    //         }
-    //     }
-    // }
+    public boolean isShipSunk(int x, int y) {
+        Square square = this.map.get(x).get(y);
+        Ship ship = square.getShip();
+
+        if (square.hasShip()){
+            int x_ship= square.getShip().getCoordX();
+            int y_ship= square.getShip().getCoordY();
+
+            if (square.getIsHit() && ship.getPosition().equals("vertical")) {
+                int  count = 0;
+                for (int i = 0; i < ship.getLength(); i++) {                
+                    if (this.map.get(x_ship + i).get(y_ship).getIsHit());
+                        count += 1;
+                }
+                if (ship.getLength() == count) {
+                    return true;
+                }                  
+            }
+            else if (square.getIsHit() && ship.getPosition().equals("horizontal")) {
+                int  count = 0;
+                for (int i = 0; i < ship.getLength(); i++) {                
+                    if (this.map.get(x_ship).get(y_ship + i).getIsHit());
+                        count += 1;
+                }
+                if (ship.getLength() == count) {
+                    return true;
+                }                  
+            }
+            
+        }
+        return false;
+    }
 
     public ArrayList<ArrayList<Square>> getMap(){
         return this.map;

@@ -5,34 +5,30 @@ public class Ship {
     private int y;
     private int length;
     private String shipName;
-    private String direction;
+    private String position;
     private boolean isSunk;
 
-    public Ship(String shipName, String direction) {
+    public Ship(String shipName, int x, int y, String position) {
 
-        if(shipName.equals("Carrier")) this.length = 5;
-        else if(shipName.equals("Battleship")) this.length = 4;
-        else if(shipName.equals("Cruiser")) this.length = 3;
-        else if(shipName.equals("Submarine")) this.length = 2;
+        if (shipName.toUpperCase().equals("CARRIER")) this.length = 5;
+        else if(shipName.toUpperCase().equals("BATTLESHIP")) this.length = 4;
+        else if(shipName.toUpperCase().equals("CRUISER")) this.length = 3;
+        else if(shipName.toUpperCase().equals("SUBMARINE")) this.length = 2;
+        else this.length = 1;
 
-        this.x = 0;
-        this.y = 0;
+        this.x = x;
+        this.y = y;
         this.shipName = shipName;
-        this.direction = direction;
+        this.position = position;
         this.isSunk = false;
     }
 
-    public int[] getCoords() {
-        int[] coords = {this.x, this.y};
-        return coords;
-    }
-
-    public int getlength() {
+    public int getLength() {
         return this.length;
     }
 
-    public String getdirection() {
-        return this.direction;
+    public String getPosition() {
+        return this.position;
     } 
 
     public boolean getIsSunk() {

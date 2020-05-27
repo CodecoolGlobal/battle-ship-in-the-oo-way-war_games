@@ -32,6 +32,6 @@ public class Square {
 
     @Override
     public String toString() {
-        return hasShip() ? "X" : "."; 
+        return hasShip() ? "X" : "\u00B7"; 
     }
 }

@@ -5,31 +5,44 @@ import java.util.Scanner;
 
 public class Main {
 
+    private static Scanner scan = new Scanner(System.in);
+    final private static int NUMBEROFSHIPS = 5;
+
     public static void main(String[] args) {
         List<Ship> ships = new ArrayList<Ship>();
         View view = new View();
-
+        view.clearDisplay();
         
         Ocean ocean = new Ocean();
-        String[] setup = new String[] {"Enter ship x coordinate (row): ", "Enter ship y coordinate (column): ", "vertical/horizontal: ", "Ship type:(Carrier (occupies 5 squares), Battleship (4), Cruiser (3), Submarine (3), and Destroyer (2)): "};
-        ArrayList<String> userInput = new ArrayList<String>();
-        for (int i = 0; i < setup.length; i++) {
-            @SuppressWarnings("resource")
-            Scanner scan = new Scanner(System.in);
-            System.out.print(setup[i]);
-            String input = scan.nextLine();
-            userInput.add(input);
+        String[] setup = {"\nEnter ship x coordinate (row): ", "\nEnter ship y coordinate (column): ", "\nPosition vertical or horizontal: ", "\nShip type: Carrier (occupies 5 squares), Battleship (4), Cruiser (3), Submarine (2), Destroyer (1): "};
+        
+        for (int i = 0; i < NUMBEROFSHIPS; i++) {
+
+            ArrayList<String> userInput = new ArrayList<String>();
+
+            for (int j = 0; j < setup.length; j++) {
+                System.out.print(setup[j]);
+                String input = scan.nextLine();
+                userInput.add(input);            
+            }
+
+            String x_coord = userInput.get(0);
+            int x = Integer.parseInt(x_coord);
+            String y_coord = userInput.get(1);
+            int y = Integer.parseInt(y_coord);
+            String position = userInput.get(2);
+            String shipName = userInput.get(3);
+
+            ships.add(new Ship(shipName, x, y, position));
+            ocean.addShip(ships.get(i), x, y);
+            view.displayGameScreen(ocean.getMap(), ocean.getMap());
+            view.displayBoard(ocean.getMap());
+        
         }
 
-        String x = userInput.get(0);
-        int x_coord = Integer.parseInt(x);
-        String y = userInput.get(1);
-        int y_coord = Integer.parseInt(y);
-        String location = userInput.get(2);
-        String shipName = userInput.get(3);
-
-        ships.add(new Ship(shipName, location));
-        ocean.addShip(ships.get(0), x_coord, y_coord);
-        view.displayGameScreen(ocean.getMap(), ocean.getMap());
-    }
+    }    
+            
 }
+    
+
+
