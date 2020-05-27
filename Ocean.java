@@ -39,26 +39,23 @@ public class Ocean {
             int x_ship= ship.getCoordX();
             int y_ship= ship.getCoordY();
 
-            if (square.getIsHit() && ship.getPosition().equals("vertical")) {
-                int  count = 0;
+            int count = 0;
+            if (square.getIsHit() && ship.getPosition().equals("vertical")) {                
                 for (int i = 0; i < ship.getLength(); i++) {                
                     if (this.map.get(x_ship + i).get(y_ship).getIsHit());
                         count += 1;
                 }
-                if (ship.getLength() == count) {
-                    return true;
-                }                  
             }
             else if (square.getIsHit() && ship.getPosition().equals("horizontal")) {
-                int  count = 0;
                 for (int i = 0; i < ship.getLength(); i++) {                
                     if (this.map.get(x_ship).get(y_ship + i).getIsHit());
                         count += 1;
                 }
-                if (ship.getLength() == count) {
-                    return true;
-                }                  
             }
+            if (ship.getLength() == count) {
+                return true;
+            } 
+            else return false;
         }
         return false;
     }
