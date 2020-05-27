@@ -35,9 +35,9 @@ public class Ocean {
         Square square = this.map.get(x).get(y);
         Ship ship = square.getShip();
 
-        if (square.hasShip()){
-            int x_ship= square.getShip().getCoordX();
-            int y_ship= square.getShip().getCoordY();
+        if (ship != null){
+            int x_ship= ship.getCoordX();
+            int y_ship= ship.getCoordY();
 
             if (square.getIsHit() && ship.getPosition().equals("vertical")) {
                 int  count = 0;
@@ -59,7 +59,6 @@ public class Ocean {
                     return true;
                 }                  
             }
-            
         }
         return false;
     }
