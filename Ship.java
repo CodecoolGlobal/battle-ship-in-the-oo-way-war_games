@@ -8,10 +8,15 @@ public class Ship {
     private String direction;
     private boolean isSunk;
 
-    public Ship(int length, String direction, String shipName) {
+    public Ship(String shipName, String direction) {
+
+        if(shipName.equals("Carrier")) this.length = 5;
+        else if(shipName.equals("Battleship")) this.length = 4;
+        else if(shipName.equals("Cruiser")) this.length = 3;
+        else if(shipName.equals("Submarine")) this.length = 2;
+
         this.x = 0;
         this.y = 0;
-        this.length = length;
         this.shipName = shipName;
         this.direction = direction;
         this.isSunk = false;
