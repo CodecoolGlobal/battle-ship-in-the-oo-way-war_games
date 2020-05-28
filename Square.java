@@ -1,19 +1,25 @@
 
 public class Square {
 
+    private String coords;
     private boolean isHit;
     private boolean isMiss;
     private boolean isEmpty;
     private Ship ship;
 
-    public Square() {
+    public Square(String coords) {
         this.isHit = false;
         //this.isMiss = false;
         this.isEmpty = true;
+        this.coords = coords;
     }
 
     public boolean getIsHit(){
         return isHit;
+    }
+
+    public String getCoords() {
+        return coords;
     }
 
     public Ship getShip(){
