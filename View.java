@@ -16,7 +16,7 @@ public class View {
         System.out.println("   A B C D E F G A H I");
         int i = 1;
         for (ArrayList<Square> row : map) {
-            System.out.print("\033[" + i + ";" + offset + "H");
+            System.out.print("\033[" + (i+1) + ";" + offset + "H");
             if (i < 10){
                 System.out.print(i + ". ");
             }else System.out.print(i + ".");
