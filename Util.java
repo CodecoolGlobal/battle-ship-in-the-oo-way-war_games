@@ -3,11 +3,6 @@ import java.util.LinkedHashMap;
 
 public class Util {
 
-
-    public static void main(String[] args) {
-        System.out.println(createShipsDict());
-    }
-
     public static LinkedHashMap<String, String> createShipsDict() {
         LinkedHashMap<String, String> shipsDict = new LinkedHashMap<String, String>();
         String[] shipTypes = {"Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
