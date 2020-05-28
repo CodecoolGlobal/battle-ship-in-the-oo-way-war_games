@@ -2,10 +2,14 @@
 public class Square {
 
     private boolean isHit;
+    private boolean isMiss;
+    private boolean isEmpty;
     private Ship ship;
 
     public Square() {
         this.isHit = false;
+        //this.isMiss = false;
+        this.isEmpty = true;
     }
 
     public boolean getIsHit(){

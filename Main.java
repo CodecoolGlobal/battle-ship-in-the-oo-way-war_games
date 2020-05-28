@@ -14,7 +14,7 @@ public class Main {
         view.clearDisplay();
         
         Ocean ocean = new Ocean();
-        String[] setup = {"\nEnter ship x coordinate (row): ", "\nEnter ship y coordinate (column): ", "\nPosition vertical or horizontal: ", "\nShip type: Carrier (occupies 5 squares), Battleship (4), Cruiser (3), Submarine (2), Destroyer (1): "};
+        String[] setup = {"\nEnter ship x coordinate (row): ", "\nEnter ship y coordinate (column): ", "\nPosition vertical or horizontal: ", "\nShip type: Carrier/CA (occupies 5 squares), Battleship/B (4), Cruiser/CR (3), Submarine/S (2), Destroyer/D (1): "};
         
         for (int i = 0; i < NUMBEROFSHIPS; i++) {
             view.clearDisplay();

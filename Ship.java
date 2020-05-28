@@ -7,13 +7,14 @@ public class Ship {
     private String shipName;
     private String position;
     private boolean isSunk;
+    private int numberOfHits;
 
     public Ship(String shipName, int x, int y, String position) {
 
-        if (shipName.toUpperCase().equals("CARRIER")) this.length = 5;
-        else if(shipName.toUpperCase().equals("BATTLESHIP")) this.length = 4;
-        else if(shipName.toUpperCase().equals("CRUISER")) this.length = 3;
-        else if(shipName.toUpperCase().equals("SUBMARINE")) this.length = 2;
+        if (shipName.toUpperCase().equals("CARRIER") || shipName.equals("CA")) this.length = 5;
+        else if(shipName.toUpperCase().equals("BATTLESHIP") || shipName.equals("B")) this.length = 4;
+        else if(shipName.toUpperCase().equals("CRUISER") || shipName.equals("CR")) this.length = 3;
+        else if(shipName.toUpperCase().equals("SUBMARINE") || shipName.equals("S")) this.length = 2;
         else this.length = 1;
 
         this.x = x;
@@ -21,6 +22,11 @@ public class Ship {
         this.shipName = shipName;
         this.position = position;
         this.isSunk = false;
+        this.numberOfHits = 0;
+    }
+
+    public void setIsSunk(){
+        this.isSunk = true;
     }
 
     public int getLength() {
