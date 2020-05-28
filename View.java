@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class View {
 
-    public void displayBoard(ArrayList<ArrayList<Square>> map){
+    void displayBoard(ArrayList<ArrayList<Square>> map){
         displayBoard(map, true, 0);
     }
 

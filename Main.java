@@ -35,9 +35,7 @@ public class Main {
 
             ships.add(new Ship(shipName, x, y, position));
             ocean.addShip(ships.get(i), x, y);
-            view.displayGameScreen(ocean.getMap(), ocean.getMap());
-            view.displayBoard(ocean.getMap());
-        
+            view.displayGameScreen(ocean.getMap(), ocean.getMap());      
         }
 
     }    
