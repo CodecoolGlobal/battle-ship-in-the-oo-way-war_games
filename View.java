@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 public class View {
 
+    ArrayList<String> messageStream;
+
+    public View(){
+        messageStream = new ArrayList<String>();
+    }
     void displayBoard(ArrayList<ArrayList<Square>> map){
         displayBoard(map, true, 0);
     }
@@ -38,6 +43,20 @@ public class View {
         clearDisplay();
         displayBoard(mapOwner);
         displayBoard(mapOwner, false, 30);
-        printMessage("Enter coordinates to attack: ");
+        printMessage("Enter coordinates to attack: \n");
+        for (String message : messageStream) {
+            printMessage(message + "\n");
+        }
+        System.out.print("\033[12;30H");
     }
-} 
+
+    void displayOptions(ArrayList<String> options){
+        int i = 1;
+        for (String option : options) {
+            if (i<10){
+                System.out.print(i + ". ");
+            }else System.out.print(i + ".");
+            System.out.println(option);
+        }
+    }
+}

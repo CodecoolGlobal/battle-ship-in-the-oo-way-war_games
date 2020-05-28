@@ -17,11 +17,12 @@ public class Main {
         String[] setup = {"\nEnter ship x coordinate (row): ", "\nEnter ship y coordinate (column): ", "\nPosition vertical or horizontal: ", "\nShip type: Carrier (occupies 5 squares), Battleship (4), Cruiser (3), Submarine (2), Destroyer (1): "};
         
         for (int i = 0; i < NUMBEROFSHIPS; i++) {
-
+            view.clearDisplay();
+            view.displayBoard(ocean.getMap());
             ArrayList<String> userInput = new ArrayList<String>();
 
             for (int j = 0; j < setup.length; j++) {
-                System.out.print(setup[j]);
+                view.printMessage(setup[j]);
                 String input = scan.nextLine();
                 userInput.add(input);            
             }
@@ -35,7 +36,6 @@ public class Main {
 
             ships.add(new Ship(shipName, x, y, position));
             ocean.addShip(ships.get(i), x, y);
-            view.displayGameScreen(ocean.getMap(), ocean.getMap());      
         }
 
     }    
