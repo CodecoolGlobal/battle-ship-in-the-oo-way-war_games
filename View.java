@@ -18,7 +18,7 @@ public class View {
 
     void displayBoard(ArrayList<ArrayList<Square>> map, boolean forOwner, int offset){
         System.out.print("\033[0;" + offset + "H");
-        System.out.println("   A B C D E F G A H I");
+        System.out.println("   A B C D E F G H I J");
         int i = 1;
         for (ArrayList<Square> row : map) {
             System.out.print("\033[" + (i+1) + ";" + offset + "H");

@@ -21,11 +21,15 @@ public class Ocean {
     }
 
     public void addShip(Ship ship, String coords) {
-        int[] xy = getNumericCoords(coords);
+
+        int[] xy = getXYCoords(coords);
+        
         int x = xy[0];
         int y = xy[1];
+
         ship.setCoordX(x);
         ship.setCoordY(y);
+
 
         if (ship.getPosition().equals("vertical")) {
             for (int i = 0; i<ship.getLength(); i++) {
@@ -40,11 +44,11 @@ public class Ocean {
         }
     }
 
-    public int[] getNumericCoords(String coords) {
+    public int[] getXYCoords(String coords) {
         int[] xy = new int[2];
         for (int i=0; i < HEIGHT; i++) {
             for (int j=0; j <WIDTH; j++) {
-                if (this.map.get(i).get(j).getCoords().equals(coords)) {
+                if (this.map.get(i).get(j).getCoords().equals(coords.toUpperCase())) {
                     xy[0] = i;
                     xy[1] = j;
                 }
@@ -86,8 +90,8 @@ public class Ocean {
         return this.map;
     }
 
-    public String getPositionFromMessage(String message) {
-        if (message.toUpperCase().equals("Y")) {
+    public String getPositionFromInput(String input) {
+        if (input.toUpperCase().equals("Y")) {
             return "horizontal";
         } else {
             return "vertical";

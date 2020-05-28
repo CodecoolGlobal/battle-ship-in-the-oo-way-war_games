@@ -28,13 +28,14 @@ public class Main {
             String coords = scan.nextLine();
             view.printMessage("Is horizontal [Y/N]: ");            
             String position = scan.nextLine();
-            position = ocean.getPositionFromMessage(position);
+            position = ocean.getPositionFromInput(position);
             ships.add(new Ship(key, position));
             ocean.addShip(ships.get(counter), coords);
             counter++;
 
         }
-
+    view.clearDisplay();
+    view.displayBoard(ocean.getMap());
     }
 
 }    
