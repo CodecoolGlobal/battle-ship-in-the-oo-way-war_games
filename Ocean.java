@@ -23,7 +23,6 @@ public class Ocean {
     public void addShip(Ship ship, String coords) {
 
         int[] xy = getXYCoords(coords);
-
         int x = xy[0];
         int y = xy[1];
 
@@ -58,7 +57,12 @@ public class Ocean {
         return null;
     }
 
-    public void isShipSunk(int x, int y) {
+    public void isShipSunk(String coords) {
+
+        int[] xy = getXYCoords(coords);
+        int x = xy[0];
+        int y = xy[1];
+
         Square square = this.map.get(x).get(y);
         Ship ship = square.getShip();
 
