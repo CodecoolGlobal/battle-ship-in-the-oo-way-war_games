@@ -23,7 +23,7 @@ public class Ocean {
     public void addShip(Ship ship, String coords) {
 
         int[] xy = getXYCoords(coords);
-        
+
         int x = xy[0];
         int y = xy[1];
 
@@ -39,7 +39,6 @@ public class Ocean {
         else {
             for (int i = 0; i<ship.getLength(); i++){
                 this.map.get(x).get(y + i).setShip(ship);
-
             }
         }
     }
@@ -51,10 +50,12 @@ public class Ocean {
                 if (this.map.get(i).get(j).getCoords().equals(coords.toUpperCase())) {
                     xy[0] = i;
                     xy[1] = j;
+                    
+                    return xy;
                 }
             }
         }
-        return xy;
+        return null;
     }
 
     public boolean isShipSunk(int x, int y) {
