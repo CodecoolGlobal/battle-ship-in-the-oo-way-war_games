@@ -80,6 +80,7 @@ public class Ocean {
                 }
             }
             if (ship.getLength() == count) {
+                ship.setIsSunk();
                 return true;
             } 
             else return false;
