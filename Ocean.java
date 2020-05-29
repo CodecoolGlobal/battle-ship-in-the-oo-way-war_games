@@ -58,7 +58,7 @@ public class Ocean {
         return null;
     }
 
-    public boolean isShipSunk(int x, int y) {
+    public void isShipSunk(int x, int y) {
         Square square = this.map.get(x).get(y);
         Ship ship = square.getShip();
 
@@ -81,11 +81,8 @@ public class Ocean {
             }
             if (ship.getLength() == count) {
                 ship.setIsSunk();
-                return true;
             } 
-            else return false;
         }
-        return false;
     }
 
     public ArrayList<ArrayList<Square>> getMap(){
