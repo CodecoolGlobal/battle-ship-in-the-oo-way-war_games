@@ -95,6 +95,5 @@ public class Ocean {
         } else {
             return "vertical";
         }
-
     }
 }
