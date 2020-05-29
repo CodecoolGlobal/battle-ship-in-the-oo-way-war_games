@@ -13,4 +13,12 @@ public class Util {
         }
         return shipsDict;
     }
+
+    public static String getPositionFromInput(String input) {
+        if (input.toUpperCase().equals("Y")) {
+            return "horizontal";
+        } else {
+            return "vertical";
+        }
+    }
 }

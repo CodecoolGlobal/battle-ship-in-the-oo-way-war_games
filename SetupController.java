@@ -30,7 +30,7 @@ public class SetupController {
             if (counter < 4) {
                 view.printMessage("Is horizontal [Y/N]: ");
                 String position = scan.nextLine();
-                position = ocean.getPositionFromInput(position);
+                position = Util.getPositionFromInput(position);
                 ships.add(new Ship(key, position));
             } else {
                 ships.add(new Ship(key, "horizontal"));
@@ -38,7 +38,7 @@ public class SetupController {
             ocean.addShip(ships.get(counter), coords);
             counter++;
         }
-        
+
     view.clearDisplay();
     view.displayBoard(ocean.getMap());
 

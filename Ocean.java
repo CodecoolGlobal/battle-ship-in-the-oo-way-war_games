@@ -88,12 +88,4 @@ public class Ocean {
     public ArrayList<ArrayList<Square>> getMap(){
         return this.map;
     }
-
-    public String getPositionFromInput(String input) {
-        if (input.toUpperCase().equals("Y")) {
-            return "horizontal";
-        } else {
-            return "vertical";
-        }
-    }
 }
