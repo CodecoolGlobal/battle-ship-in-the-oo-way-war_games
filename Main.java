@@ -24,12 +24,17 @@ public class Main {
             view.clearDisplay();
             view.displayBoard(ocean.getMap());
 
-            view.printMessage("\nEnter " + key + " coordinates - " + shipsDict.get(key) + ": ");
+            view.printMessage("\nEnter " + key + " coordinates (" + shipsDict.get(key) + "): ");
             String coords = scan.nextLine();
-            view.printMessage("Is horizontal [Y/N]: ");            
-            String position = scan.nextLine();
-            position = ocean.getPositionFromInput(position);
-            ships.add(new Ship(key, position));
+
+            if (counter < 4) {
+                view.printMessage("Is horizontal [Y/N]: ");
+                String position = scan.nextLine();
+                position = ocean.getPositionFromInput(position);
+                ships.add(new Ship(key, position));
+            } else {
+                ships.add(new Ship(key, "horizontal"));
+            }        
             ocean.addShip(ships.get(counter), coords);
             counter++;
 
