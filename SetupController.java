@@ -1,12 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 
 public class SetupController {
-
-    private static Scanner scan = new Scanner(System.in);
 
     public static void run() {
 
@@ -19,19 +16,25 @@ public class SetupController {
         Map<String, String> shipsDict = Util.createShipsDict();
 
         int counter = 0;
+        String coords = "";
+        String position = "";
+        String coordsPattern = "[a-jA-J][1-9][0]*";
+        String positionPattern = "(?i)[yn]";
+
         for (String key: shipsDict.keySet()) {
 
             view.clearDisplay();
             view.displayBoard(ocean.getMap());
 
-            view.printMessage("\nEnter " + key + " coordinates (" + shipsDict.get(key) + "): ");
-            String coords = scan.nextLine();
+            view.printMessage("\nEnter " + key + " coordinates (" + shipsDict.get(key) + "): ");                  
+            coords = Util.validateUserInput(coordsPattern, coords, "\nEnter valid coordinates: ");
 
             if (counter < 4) {
-                view.printMessage("Is horizontal [Y/N]: ");
-                String position = scan.nextLine();
+                view.printMessage("\nIs horizontal [Y/N]: ");
+                position = Util.validateUserInput(positionPattern, position, "\nType Y or N: ");            
                 position = Util.getPositionFromInput(position);
                 ships.add(new Ship(key, position));
+
             } else {
                 ships.add(new Ship(key, "horizontal"));
             }        
