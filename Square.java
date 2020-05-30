@@ -30,7 +30,7 @@ public class Square {
         this.isHit = true;
     }
 
-    public void markIsNotEmpty(){
+    public void markIsEmpty(){
         this.isEmpty = false;
     }
 
@@ -59,9 +59,5 @@ public class Square {
             else if(isMiss) return "-";
             else return ".";
         }
-    }
-    @Override
-    public String toString() {
-        return hasShip() ? "X" : "\u00B7"; 
     }
 }
