@@ -27,7 +27,7 @@ public class View {
             }else System.out.print(i + " ");
             
             for (Square square : row) {
-                System.out.print(square.toString() + " ");
+                System.out.print(square.getIconSquare(forOwner) + " ");
             }
             System.out.println();
             i++;

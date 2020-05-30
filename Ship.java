@@ -7,7 +7,6 @@ public class Ship {
     private String shipName;
     private String position;
     private boolean isSunk;
-    private int numberOfHits;
 
     public Ship(String shipName, String position) {
 
@@ -20,7 +19,6 @@ public class Ship {
         this.shipName = shipName;
         this.position = position;
         this.isSunk = false;
-        this.numberOfHits = 0;
     }
 
     public void setIsSunk(){

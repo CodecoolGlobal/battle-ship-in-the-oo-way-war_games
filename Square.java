@@ -9,7 +9,7 @@ public class Square {
 
     public Square(String coords) {
         this.isHit = false;
-        //this.isMiss = false;
+        this.isMiss = false;
         this.isEmpty = true;
         this.coords = coords;
     }
@@ -30,8 +30,16 @@ public class Square {
         this.isHit = true;
     }
 
+    public void markIsNotEmpty(){
+        this.isEmpty = false;
+    }
+
     public void setShip(Ship ship) {
         this.ship = ship;
+    }
+
+    public void markMiss(){
+        this.isMiss = true;
     }
 
     public boolean hasShip(){
@@ -40,6 +48,18 @@ public class Square {
         }else return false;
     }
 
+    public String getIconSquare(boolean ownerOcean){
+        if(ownerOcean){
+            if(isEmpty) return ".";
+            else if(isMiss) return "-";
+            else if(isHit) return "!";
+            else return "X";
+        }else {
+            if(isHit) return "!";
+            else if(isMiss) return "-";
+            else return ".";
+        }
+    }
     @Override
     public String toString() {
         return hasShip() ? "X" : "\u00B7"; 
