@@ -26,25 +26,34 @@ public class SetupController {
             view.clearDisplay();
             view.displayBoard(ocean.getMap());
 
-            view.printMessage("\nEnter " + key + " coordinates (" + shipsDict.get(key) + "): ");                  
-            coords = Util.validateUserInput(coordsPattern, coords, "\nEnter valid coordinates: ");
+                boolean validInput = false;
 
-            if (counter < 4) {
-                view.printMessage("\nIs horizontal? [Y/N]: ");
-                position = Util.validateUserInput(positionPattern, position, "\nType Y or N: ");            
-                position = Util.getPositionFromInput(position);
-                ships.add(new Ship(key, position));
+                while (!validInput) {
+                    view.printMessage("\nEnter " + key + " coordinates (" + shipsDict.get(key) + "): ");          
+                    coords = Util.validateUserInput(coordsPattern, coords, "\nEnter valid coordinates: ");
 
-            } else {
-                ships.add(new Ship(key, "horizontal"));
-            }        
+                    if (counter < 4) {
+                        view.printMessage("\nIs horizontal? [Y/N]: ");
+                        position = Util.validateUserInput(positionPattern, position, "\nType Y or N: ");            
+                        position = Util.getPositionFromInput(position);
+                        Ship ship = new Ship(key, position);
+
+                        if (ocean.checkIfWithinBounds(ship, coords)) {
+                            ships.add(ship);
+                            validInput = true;
+                        }
+                    } else {
+                        ships.add(new Ship(key, "horizontal"));
+                        validInput = true;
+                    }
+                }        
+
             ocean.addShip(ships.get(counter), coords);
             counter++;
         }
 
-    view.clearDisplay();
-    view.displayBoard(ocean.getMap());
+        view.clearDisplay();
+        view.displayBoard(ocean.getMap());
 
     }
-    
 }

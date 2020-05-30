@@ -6,7 +6,7 @@ public class Ocean {
     final private int HEIGHT = 10;
 
     public Ocean(){
-        this.map = new ArrayList<ArrayList<Square>>();
+        this.map = new ArrayList<>();
         String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
         for (int i=0; i<HEIGHT; i++){
@@ -22,13 +22,12 @@ public class Ocean {
 
     public void addShip(Ship ship, String coords) {
 
-        int[] xy = getXYCoords(coords);
+        int[] xy = getSquareLocation(coords);
         int x = xy[0];
         int y = xy[1];
 
         ship.setCoordX(x);
         ship.setCoordY(y);
-
 
         if (ship.getPosition().equals("vertical")) {
             for (int i = 0; i<ship.getLength(); i++) {
@@ -42,26 +41,38 @@ public class Ocean {
         }
     }
 
-    public int[] getXYCoords(String coords) {
-        int[] xy = new int[2];
+    public int[] getSquareLocation(String coords) {
+        int[] squareLocation = new int[2];
         for (int i=0; i < HEIGHT; i++) {
             for (int j=0; j <WIDTH; j++) {
                 if (this.map.get(i).get(j).getCoords().equals(coords.toUpperCase())) {
-                    xy[0] = i;
-                    xy[1] = j;
-                    
-                    return xy;
+                    squareLocation[0] = i;
+                    squareLocation[1] = j;                    
+                    return squareLocation;
                 }
             }
         }
         return null;
     }
 
+    public boolean checkIfWithinBounds(Ship ship, String coords) {
+        int[] squareLocation = getSquareLocation(coords);
+        int x = squareLocation[0];
+        int y = squareLocation[1];
+
+        if ((ship.getPosition().equals("vertical") && x + ship.getLength() > HEIGHT) || 
+            (ship.getPosition().equals("horizontal") && y + ship.getLength() > WIDTH)) {
+            System.out.println("\nYou cannot set ship outside the board");
+            return false;
+        }
+        return true;
+    }
+
     public void isShipSunk(String coords) {
 
-        int[] xy = getXYCoords(coords);
-        int x = xy[0];
-        int y = xy[1];
+        int[] squareLocation = getSquareLocation(coords);
+        int x = squareLocation[0];
+        int y = squareLocation[1];
 
         Square square = this.map.get(x).get(y);
         Ship ship = square.getShip();
