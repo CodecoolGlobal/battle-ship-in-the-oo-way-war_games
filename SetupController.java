@@ -7,7 +7,7 @@ public class SetupController {
 
     public static void run() {
 
-        List<Ship> ships = new ArrayList<Ship>();
+        List<Ship> ships = new ArrayList<>();
         View view = new View();
         view.clearDisplay();
         
@@ -30,7 +30,7 @@ public class SetupController {
             coords = Util.validateUserInput(coordsPattern, coords, "\nEnter valid coordinates: ");
 
             if (counter < 4) {
-                view.printMessage("\nIs horizontal [Y/N]: ");
+                view.printMessage("\nIs horizontal? [Y/N]: ");
                 position = Util.validateUserInput(positionPattern, position, "\nType Y or N: ");            
                 position = Util.getPositionFromInput(position);
                 ships.add(new Ship(key, position));

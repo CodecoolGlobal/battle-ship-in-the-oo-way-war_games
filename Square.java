@@ -50,14 +50,14 @@ public class Square {
 
     public String getIconSquare(boolean ownerOcean){
         if(ownerOcean){
-            if(isEmpty) return ".";
+            if(isEmpty) return "\u00B7";
             else if(isMiss) return "-";
             else if(isHit) return "!";
             else return "X";
         }else {
             if(isHit) return "!";
             else if(isMiss) return "-";
-            else return ".";
+            else return "\u00B7";
         }
     }
 }
