@@ -45,9 +45,8 @@ public class View {
         displayBoard(mapOwner);
         displayBoard(mapOwner, false, 30);
         printMessage("Enter coordinates to attack: \n");
-        for (String message : messageStream) {
-            printMessage(message + "\n");
-        }
+        trimMessageStream(6);
+        printMessageStream();
         System.out.print("\033[12;30H");
     }
 
