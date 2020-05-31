@@ -38,13 +38,21 @@ public class SetupController {
                         position = Util.getPositionFromInput(position);
                         Ship ship = new Ship(key, position);
 
-                        if (ocean.checkIfWithinBounds(ship, coords)) {
+                        if (ocean.checkIfWithinBounds(ship, coords) && ocean.checkIfSpaceFreeForShip(ship, coords, position)) {
+                            ships.add(ship);
+                            validInput = true;
+                        } else {
+                            System.out.println("\nShips cannot be placed outside the board, overlap or touch");
+                        }
+                    } else {
+                        Ship ship = new Ship(key, "horizontal");
+                        if (!ocean.checkIfSpaceFreeForShip(ship, coords, "horizontal")) {
+                            System.out.println("\nShips cannot overlap or touch");
+                        } else {
                             ships.add(ship);
                             validInput = true;
                         }
-                    } else {
-                        ships.add(new Ship(key, "horizontal"));
-                        validInput = true;
+                            
                     }
                 }        
 
