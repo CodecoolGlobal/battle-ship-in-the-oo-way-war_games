@@ -22,22 +22,101 @@ public class Ocean {
 
     public void addShip(Ship ship, String coords) {
 
-        int[] xy = getSquareLocation(coords);
-        int x = xy[0];
-        int y = xy[1];
+        int[] squareLocation = getSquareLocation(coords);
+        int x = squareLocation[0];
+        int y = squareLocation[1];
 
         ship.setCoordX(x);
         ship.setCoordY(y);
 
         if (ship.getPosition().equals("vertical")) {
             for (int i = 0; i<ship.getLength(); i++) {
-                this.map.get(x + i).get(y).setShip(ship);
+                this.map.get(x + i).get(y).setShip(ship);                
             }
         }
         else {
             for (int i = 0; i<ship.getLength(); i++){
                 this.map.get(x).get(y + i).setShip(ship);
             }
+        }
+    }
+
+    public boolean checkIfSpaceFreeForShip(Ship ship, String coords) {  
+        int[] xy = getSquareLocation(coords);
+        int x = xy[0];
+        int y = xy[1];
+
+        if (ship.getPosition().equals("vertical")) {
+            for (int i = 0; i<ship.getLength(); i++) {
+                if (checkIfSpaceIsTaken(x + i, y)) {
+                    return false;
+                }  
+            }
+        } else {
+            for (int i = 0; i<ship.getLength(); i++) {
+                if (checkIfSpaceIsTaken(x, y + i)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean checkIfSpaceIsTaken(int x, int y) {
+
+        if (x == 0 && y == 0) {
+            if (checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,1) ||  checkIfShipExists(x,y,0,1)) {
+                return true;
+            }
+        }
+        else if (x == 0 && y != WIDTH - 1) {
+            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,1,-1) || checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,1) || checkIfShipExists(x,y,0,1)) {
+                return true;
+            }                
+        }
+        else if (x == 0 && y == WIDTH - 1) {
+            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,1,-1)  || checkIfShipExists(x,y,1,0)) {
+                return true;
+            }
+        }
+        else if (x != HEIGHT - 1 && y == 0) {
+            if (checkIfShipExists(x,y,-1,0) || checkIfShipExists(x,y,-1,1) || checkIfShipExists(x,y,0,1) || checkIfShipExists(x,y,1,1) || checkIfShipExists(x,y,1,0)) {
+                return true;
+            }
+        }
+        else if (x == HEIGHT - 1  && y == 0) {
+            if (checkIfShipExists(x,y,-1,0) || checkIfShipExists(x,y,-1,1) || checkIfShipExists(x,y,0,1)) {
+                return true;
+            }
+        }
+        else if (x == HEIGHT - 1 && y != WIDTH - 1) {
+            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,-1,-1) || checkIfShipExists(x,y,-1,0) || checkIfShipExists(x,y,-1,1) || checkIfShipExists(x,y,0,1) ) {
+                return true;
+            }
+        }
+        else if (x == HEIGHT - 1 && y == WIDTH - 1) {
+            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,-1,-1) || checkIfShipExists(x,y,-1,0)) {
+                return true;
+            }
+        }
+        else if (x != HEIGHT - 1 && y == WIDTH - 1) {
+            if (checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,-1) || checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,-1,-1) || checkIfShipExists(x,y,-1,0)) {
+                return true;
+            }
+        }
+        else {
+            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,-1,-1) || checkIfShipExists(x,y,-1,0) || checkIfShipExists(x,y,-1,1) || checkIfShipExists(x,y,0,1) || checkIfShipExists(x,y,1,1) || checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,-1)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkIfShipExists(int x, int y, int x_offset, int y_offset) {
+        if (this.map.get(x + x_offset).get(y + y_offset).getShip() != null) {
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -60,9 +139,10 @@ public class Ocean {
         int x = squareLocation[0];
         int y = squareLocation[1];
 
-        if ((ship.getPosition().equals("vertical") && x + ship.getLength() > HEIGHT) || 
-            (ship.getPosition().equals("horizontal") && y + ship.getLength() > WIDTH)) {
-            System.out.println("\nYou cannot set ship outside the board");
+        if (ship.getPosition().equals("vertical") && x + ship.getLength() > HEIGHT) {
+            return false;
+        } 
+        else if (ship.getPosition().equals("horizontal") && y + ship.getLength() > WIDTH) {
             return false;
         }
         return true;
