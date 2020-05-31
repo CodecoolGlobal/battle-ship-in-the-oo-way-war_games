@@ -38,7 +38,7 @@ public class SetupController {
                         position = Util.getPositionFromInput(position);
                         Ship ship = new Ship(key, position);
 
-                        if (ocean.checkIfWithinBounds(ship, coords) && ocean.checkIfSpaceFreeForShip(ship, coords, position)) {
+                        if (ocean.checkIfWithinBounds(ship, coords) && ocean.checkIfSpaceFreeForShip(ship, coords)) {
                             ships.add(ship);
                             validInput = true;
                         } else {
@@ -46,7 +46,7 @@ public class SetupController {
                         }
                     } else {
                         Ship ship = new Ship(key, "horizontal");
-                        if (!ocean.checkIfSpaceFreeForShip(ship, coords, "horizontal")) {
+                        if (!ocean.checkIfSpaceFreeForShip(ship, coords)) {
                             System.out.println("\nShips cannot overlap or touch");
                         } else {
                             ships.add(ship);
