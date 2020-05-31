@@ -4,13 +4,11 @@ public class Square {
     private String coords;
     private boolean isHit;
     private boolean isMiss;
-    private boolean isEmpty;
     private Ship ship;
 
     public Square(String coords) {
         this.isHit = false;
         this.isMiss = false;
-        this.isEmpty = true;
         this.coords = coords;
     }
 
@@ -30,10 +28,6 @@ public class Square {
         this.isHit = true;
     }
 
-    public void markIsEmpty(){
-        this.isEmpty = false;
-    }
-
     public void setShip(Ship ship) {
         this.ship = ship;
     }
@@ -50,14 +44,14 @@ public class Square {
 
     public String getIconSquare(boolean ownerOcean){
         if(ownerOcean){
-            if(isEmpty) return "\u00B7";
-            else if(isMiss) return "-";
-            else if(isHit) return "!";
-            else return "X";
+            if(!hasShip()) return "\u00B7";
+                else if(isMiss) return "-";
+                else if(isHit) return "!";
+                else return "X";
         }else {
-            if(isHit) return "!";
-            else if(isMiss) return "-";
-            else return "\u00B7";
+                if(isHit) return "!";
+                else if(isMiss) return "-";
+                else return "\u00B7";
         }
     }
 }

@@ -60,6 +60,4 @@ public class Ship {
     public void setShipName(String shipName){
         this.shipName = shipName;
     }
-
-
 }

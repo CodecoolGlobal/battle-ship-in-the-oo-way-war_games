@@ -8,6 +8,7 @@ public class View {
     public View(){
         messageStream = new ArrayList<String>();
     }
+
     void displayBoard(ArrayList<ArrayList<Square>> map){
         displayBoard(map, true, 0);
     }
