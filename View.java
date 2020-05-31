@@ -60,4 +60,33 @@ public class View {
             System.out.println(option);
         }
     }
+
+    void displaySetup(ArrayList<ArrayList<Square>> map,
+                      String shipname,
+                      String question){
+        clearDisplay();
+        displayBoard(map);
+        printMessage("\n");
+        printMessage(shipname + ":\n");
+        printMessage(question + ":\n");
+        printMessageStream();
+        trimMessageStream(0);
+        System.out.print("\033[13" + (question.length()+2) + "H"); // this might require calibration
+    }
+
+    void trimMessageStream(int limit){
+        /**
+         * Reduces number of element in messageStream
+         * @param int limit Number of messages that will be left in messageStream
+         */
+        while (this.messageStream.size() > limit){
+            this.messageStream.remove(0);
+        }
+    }
+
+    void printMessageStream(){
+        for (String message : messageStream) {
+            System.out.println(message);
+        }
+    }
 }
