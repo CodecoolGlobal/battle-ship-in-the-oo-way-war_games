@@ -10,11 +10,12 @@ public class Ship {
 
     public Ship(String shipName, String position) {
 
-        if (shipName.equals("Carrier")) this.length = 5;
-        else if(shipName.equals("Battleship")) this.length = 4;
-        else if(shipName.equals("Cruiser")) this.length = 3;
-        else if(shipName.equals("Submarine")) this.length = 3;
-        else if(shipName.equals("Destroyer")) this.length = 2;
+        switch (shipName) {
+            case "Carrier" -> this.length = 5;
+            case "Battleship" -> this.length = 4;
+            case "Cruiser", "Submarine" -> this.length = 3;
+            case "Destroyer" -> this.length = 2;
+        }
 
         this.shipName = shipName;
         this.position = position;
