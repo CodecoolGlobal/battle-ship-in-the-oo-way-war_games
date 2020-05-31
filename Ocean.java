@@ -14,8 +14,8 @@ public class Ocean {
         }
 
         for (int i=0; i < WIDTH; i++){
-            for (int j=0; j< letters.length; j++) {
-                map.get(i).add(new Square(letters[j] + (i + 1)));
+            for (String letter : letters) {
+                map.get(i).add(new Square(letter + (i + 1)));
             }
         }
     }
@@ -65,59 +65,36 @@ public class Ocean {
     public boolean checkIfSpaceIsTaken(int x, int y) {
 
         if (x == 0 && y == 0) {
-            if (checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,1) || checkIfShipExists(x,y,0,1)) {
-                return true;
-            }
+            return checkIfShipExists(x, y, 1, 0) || checkIfShipExists(x, y, 1, 1) || checkIfShipExists(x, y, 0, 1);
         }
         else if (x == 0 && y != WIDTH - 1) {
-            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,1,-1) || checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,1) || checkIfShipExists(x,y,0,1)) {
-                return true;
-            }                
+            return checkIfShipExists(x, y, 0, -1) || checkIfShipExists(x, y, 1, -1) || checkIfShipExists(x, y, 1, 0) || checkIfShipExists(x, y, 1, 1) || checkIfShipExists(x, y, 0, 1);
         }
-        else if (x == 0 && y == WIDTH - 1) {
-            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,1,-1) || checkIfShipExists(x,y,1,0)) {
-                return true;
-            }
+        else if (x == 0) {
+            return checkIfShipExists(x, y, 0, -1) || checkIfShipExists(x, y, 1, -1) || checkIfShipExists(x, y, 1, 0);
         }
         else if (x != HEIGHT - 1 && y == 0) {
-            if (checkIfShipExists(x,y,-1,0) || checkIfShipExists(x,y,-1,1) || checkIfShipExists(x,y,0,1) || checkIfShipExists(x,y,1,1) || checkIfShipExists(x,y,1,0)) {
-                return true;
-            }
+            return checkIfShipExists(x, y, -1, 0) || checkIfShipExists(x, y, -1, 1) || checkIfShipExists(x, y, 0, 1) || checkIfShipExists(x, y, 1, 1) || checkIfShipExists(x, y, 1, 0);
         }
         else if (x == HEIGHT - 1  && y == 0) {
-            if (checkIfShipExists(x,y,-1,0) || checkIfShipExists(x,y,-1,1) || checkIfShipExists(x,y,0,1)) {
-                return true;
-            }
+            return checkIfShipExists(x, y, -1, 0) || checkIfShipExists(x, y, -1, 1) || checkIfShipExists(x, y, 0, 1);
         }
         else if (x == HEIGHT - 1 && y != WIDTH - 1) {
-            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,-1,-1) || checkIfShipExists(x,y,-1,0) || checkIfShipExists(x,y,-1,1) || checkIfShipExists(x,y,0,1) ) {
-                return true;
-            }
+            return checkIfShipExists(x, y, 0, -1) || checkIfShipExists(x, y, -1, -1) || checkIfShipExists(x, y, -1, 0) || checkIfShipExists(x, y, -1, 1) || checkIfShipExists(x, y, 0, 1);
         }
-        else if (x == HEIGHT - 1 && y == WIDTH - 1) {
-            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,-1,-1) || checkIfShipExists(x,y,-1,0)) {
-                return true;
-            }
+        else if (x == HEIGHT - 1) {
+            return checkIfShipExists(x, y, 0, -1) || checkIfShipExists(x, y, -1, -1) || checkIfShipExists(x, y, -1, 0);
         }
-        else if (x != HEIGHT - 1 && y == WIDTH - 1) {
-            if (checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,-1) || checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,-1,-1) || checkIfShipExists(x,y,-1,0)) {
-                return true;
-            }
+        else if (y == WIDTH - 1) {
+            return checkIfShipExists(x, y, 1, 0) || checkIfShipExists(x, y, 1, -1) || checkIfShipExists(x, y, 0, -1) || checkIfShipExists(x, y, -1, -1) || checkIfShipExists(x, y, -1, 0);
         }
         else {
-            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,-1,-1) || checkIfShipExists(x,y,-1,0) || checkIfShipExists(x,y,-1,1) || checkIfShipExists(x,y,0,1) || checkIfShipExists(x,y,1,1) || checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,-1)) {
-                return true;
-            }
+            return checkIfShipExists(x, y, 0, -1) || checkIfShipExists(x, y, -1, -1) || checkIfShipExists(x, y, -1, 0) || checkIfShipExists(x, y, -1, 1) || checkIfShipExists(x, y, 0, 1) || checkIfShipExists(x, y, 1, 1) || checkIfShipExists(x, y, 1, 0) || checkIfShipExists(x, y, 1, -1);
         }
-        return false;
     }
 
     public boolean checkIfShipExists(int x, int y, int x_offset, int y_offset) {
-        if (this.map.get(x + x_offset).get(y + y_offset).getShip() != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return this.map.get(x + x_offset).get(y + y_offset).getShip() != null;
     }
 
     public int[] getSquareLocation(String coords) {
@@ -142,10 +119,7 @@ public class Ocean {
         if (ship.getPosition().equals("vertical") && x + ship.getLength() > HEIGHT) {
             return false;
         } 
-        else if (ship.getPosition().equals("horizontal") && y + ship.getLength() > WIDTH) {
-            return false;
-        }
-        return true;
+        else return !ship.getPosition().equals("horizontal") || y + ship.getLength() <= WIDTH;
     }
 
     public void isShipSunk(String coords) {
@@ -164,14 +138,16 @@ public class Ocean {
             int count = 0;
             if (square.getIsHit() && ship.getPosition().equals("vertical")) {                
                 for (int i = 0; i < ship.getLength(); i++) {                
-                    if (this.map.get(x_ship + i).get(y_ship).getIsHit());
+                    if (this.map.get(x_ship + i).get(y_ship).getIsHit()) {
                         count++;
+                    };
                 }
             }
             else if (square.getIsHit() && ship.getPosition().equals("horizontal")) {
                 for (int i = 0; i < ship.getLength(); i++) {                
-                    if (this.map.get(x_ship).get(y_ship + i).getIsHit());
+                    if (this.map.get(x_ship).get(y_ship + i).getIsHit()) {
                         count++;
+                    };
                 }
             }
             if (ship.getLength() == count) {

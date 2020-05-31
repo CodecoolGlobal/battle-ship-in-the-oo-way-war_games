@@ -40,7 +40,7 @@ public class SetupController {
                     ships.add(ship);
                     validInput = true;
                 } else {
-                    System.out.println("\nShips cannot be placed outside the board, cannot overlap or touch");
+                    System.out.println("\nShips cannot be placed outside the board, they cannot overlap or touch");
                 }
             }
 
