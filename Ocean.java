@@ -42,9 +42,9 @@ public class Ocean {
     }
 
     public boolean checkIfSpaceFreeForShip(Ship ship, String coords) {  
-        int[] xy = getSquareLocation(coords);
-        int x = xy[0];
-        int y = xy[1];
+        int[] squareLocation = getSquareLocation(coords);
+        int x = squareLocation[0];
+        int y = squareLocation[1];
 
         if (ship.getPosition().equals("vertical")) {
             for (int i = 0; i<ship.getLength(); i++) {
@@ -65,7 +65,7 @@ public class Ocean {
     public boolean checkIfSpaceIsTaken(int x, int y) {
 
         if (x == 0 && y == 0) {
-            if (checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,1) ||  checkIfShipExists(x,y,0,1)) {
+            if (checkIfShipExists(x,y,1,0) || checkIfShipExists(x,y,1,1) || checkIfShipExists(x,y,0,1)) {
                 return true;
             }
         }
@@ -75,7 +75,7 @@ public class Ocean {
             }                
         }
         else if (x == 0 && y == WIDTH - 1) {
-            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,1,-1)  || checkIfShipExists(x,y,1,0)) {
+            if (checkIfShipExists(x,y,0,-1) || checkIfShipExists(x,y,1,-1) || checkIfShipExists(x,y,1,0)) {
                 return true;
             }
         }

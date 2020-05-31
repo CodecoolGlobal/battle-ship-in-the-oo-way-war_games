@@ -13,8 +13,8 @@ public class Ship {
         if (shipName.equals("Carrier")) this.length = 5;
         else if(shipName.equals("Battleship")) this.length = 4;
         else if(shipName.equals("Cruiser")) this.length = 3;
-        else if(shipName.equals("Submarine")) this.length = 2;
-        else if(shipName.equals("Destroyer")) this.length = 1;
+        else if(shipName.equals("Submarine")) this.length = 3;
+        else if(shipName.equals("Destroyer")) this.length = 2;
 
         this.shipName = shipName;
         this.position = position;

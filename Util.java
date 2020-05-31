@@ -10,7 +10,7 @@ public class Util {
     public static Map<String, String> createShipsDict() {
         Map<String, String> shipsDict = new LinkedHashMap<>();
         String[] shipTypes = {"Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
-        String[] description = {"occupies 5 squares", "occupies 4 squares", "occupies 3 squares", "occupies 2 squares", "occupies 1 square"};
+        String[] description = {"occupies 5 squares", "occupies 4 squares", "occupies 3 squares", "occupies 3 squares", "occupies 2 squares"};
 
         for (int i = 0; i < shipTypes.length; i++) {
             shipsDict.put(shipTypes[i], description[i]);
