@@ -29,11 +29,14 @@ public class MenuController {
 
     public static void printMenu() {
 
-        String[] options = {"New game", "Help", "Exit"};
-
+        String[] options = {"New game", "  Help", "  Exit"};
+        System.out.println("------------------");
+        System.out.println("    BATTLESHIP");
+        System.out.println("------------------");
         for(int index = 0; index < options.length; index++){
-            System.out.println(index + 1 + ". " + options[index]);
+            System.out.println("   " + (index + 1) + ". " + options[index]);
         }
+        System.out.println("------------------");
     }
 
     static int getUserInput(){
@@ -49,11 +52,11 @@ public class MenuController {
 
     static void printRules(View view){
         view.clearDisplay();
-        String[] rules = {"***RULES***\n\nEach player's fleet contains 5 different ships:\n -Carrier (5 holes)\n -Battleship (4 holes)\n -Cruiser (3 holes)\n -Submarine (3 holes)\n -Destroyer (2 holes) \n",
-                          "Place your fleet of 5 ships on the ocean grid. Rules for placing ships: \n -Place each ship in any horizontal or vertical position but not diagonally",
+        String[] rules = {"                 ***RULES***\n\n1. Each player's fleet contains 5 different ships:\n -Carrier (5 holes)\n -Battleship (4 holes)\n -Cruiser (3 holes)\n -Submarine (3 holes)\n -Destroyer (2 holes) \n",
+                          "2. Place your fleet of 5 ships on the ocean grid. Rules for placing ships: \n -Place each ship in any horizontal or vertical position but not diagonally",
                           " -Don't place a ship so that any part of it overlaps letters, numbers, the edge of the grid or another ship\n",
-                          "Decide who will start. You and your opponent will alternate turns, calling out one shot per turn to try to hit each other's ships. If you hit you get additional shot.",
-                          "Once all the squares in any one ship are marked hit, the ship will sink. If you are the first player to sink your opponent's entire fleet of 5 ships, you win the game.\n"};
+                          "3. Decide who will start. You and your opponent will alternate turns, calling out one shot per turn to try to hit each other's ships. If you hit you get additional shot.\n",
+                          "4. Once all the squares in any one ship are marked hit, the ship will sink. If you are the first player to sink your opponent's entire fleet of 5 ships, you win the game.\n"};
         
         for(int index = 0; index < rules.length; index++){
             System.out.println(rules[index]);
