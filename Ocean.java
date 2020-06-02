@@ -159,4 +159,14 @@ public class Ocean {
     public ArrayList<ArrayList<Square>> getMap(){
         return this.map;
     }
+
+    public boolean areAllSunk(){
+        boolean result = true;
+        for (ArrayList<Square> line : map) {
+            for (Square square : line) {
+                if (square.hasShip() && !square.getIsHit()) result = false;
+            }
+        }
+        return result;
+    }
 }

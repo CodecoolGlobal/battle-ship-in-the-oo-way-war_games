@@ -7,6 +7,7 @@ public class GameController {
     private Scanner scan;
     private View view;
     private boolean isRunning = true;
+    private String winner;
 
     public GameController(Ocean ocean1, Ocean ocean2){
         this.ocean1 = ocean1;
@@ -20,6 +21,12 @@ public class GameController {
             runTurn(ocean1, ocean2, "Player 1");
             if (isRunning) runTurn(ocean2, ocean1, "Player 2");
         }
+
+        view.clearDisplay();
+        view.printMessage("The winner is " + winner + "\n");
+        view.printMessage("Press enter to return to main menu.");
+        scan.nextLine();
+        scan.nextLine();
     }
 
     void initialise() {
@@ -51,7 +58,6 @@ public class GameController {
                 oceanOppo.getMap().get(coords[0]).get(coords[1]).markHit();
                 if (!oceanOppo.getMap().get(coords[0]).get(coords[1]).hasShip()){
                     view.messageStream.add("You've missed!");
-                    view.messageStream.add("Press enter to end this turn.");
                     isTurnOver = true;
             } else {
                 oceanOppo.isShipSunk(input);
@@ -61,8 +67,16 @@ public class GameController {
             }
             }
             }
+        if (oceanOppo.areAllSunk()){
+            isRunning = false;
+            winner = playerName;
+            isTurnOver = true;
+        }else {
+            view.messageStream.add("Press enter to end this turn.");
+            scan.nextLine();
+            scan.nextLine();
         }
-        scan.nextLine();
-        scan.nextLine();
+        }
+
     }
 }
