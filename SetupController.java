@@ -46,12 +46,12 @@ public class SetupController {
                     }
                 }
     
-                ocean.addShip(ocean.getShips().get(counter), coords);                
-                view.clearDisplay();
-                view.displayBoard(ocean.getMap());
+                ocean.addShip(ocean.getShips().get(counter), coords);         
                 counter++;
             }
             oceans.add(ocean);
+            view.clearDisplay();
+            view.displayBoard(ocean.getMap());
             Util.pressAnyKeyToContinue();
         }
 

@@ -14,7 +14,7 @@ public class MenuController {
             view.clearDisplay();
             printMenu();
 
-            System.out.print("Choose one of options: ");
+            System.out.print("Choose one of the options: ");
             int userInput = getUserInput();
             
 
@@ -32,7 +32,7 @@ public class MenuController {
 
     public static void printMenu() {
 
-        String[] options = {"New game", "  Help", "  Exit"};
+        String[] options = {" New game", " Help", " Exit"};
         System.out.println("------------------");
         System.out.println("    BATTLESHIP");
         System.out.println("------------------");
