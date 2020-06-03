@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class MenuController {
@@ -18,7 +19,9 @@ public class MenuController {
             
 
             if (userInput == 1) {
-                SetupController.run();
+                List<Ocean> oceans = SetupController.run();
+                GameController game = new GameController(oceans.get(0), oceans.get(1));
+                game.run();
             } else if (userInput == 2) {
                 printRules(view);
             } else if (userInput == 3) {
