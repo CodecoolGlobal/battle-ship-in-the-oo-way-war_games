@@ -37,7 +37,7 @@ public class Util {
     }
 
     public static void pressAnyKeyToContinue()  { 
-        System.out.println("\nPress any key to continue");
+        System.out.println("\nPress enter to continue");
         try {
             System.in.read();
         }
