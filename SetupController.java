@@ -18,7 +18,7 @@ public class SetupController {
         String coordsPattern = "[a-jA-J][1-9][0]*";
         String positionPattern = "(?i)[yn]";
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < players.length; i++) {
             int counter = 0;
             Ocean ocean = new Ocean();
             for (String key: shipsDict.keySet()) {
