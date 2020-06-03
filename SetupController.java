@@ -10,7 +10,6 @@ public class SetupController {
         List<Ocean> oceans = new ArrayList<>();
         String[] players = {"Player 1", "Player 2"};
         View view = new View();
-
         Map<String, String> shipsDict = Util.createShipsDict();
 
         String coords = "";
@@ -21,8 +20,7 @@ public class SetupController {
         for (int i = 0; i < players.length; i++) {
             int counter = 0;
             Ocean ocean = new Ocean();
-            for (String key: shipsDict.keySet()) {
-                
+            for (String key: shipsDict.keySet()) {                
     
                 view.clearDisplay();
                 view.displayBoard(ocean.getMap());
@@ -46,7 +44,7 @@ public class SetupController {
                     }
                 }
     
-                ocean.addShip(ocean.getShips().get(counter), coords);         
+                ocean.placeShipOnBoard(ocean.getShips().get(counter), coords);         
                 counter++;
             }
             oceans.add(ocean);

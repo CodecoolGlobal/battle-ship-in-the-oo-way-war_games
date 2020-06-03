@@ -26,7 +26,7 @@ public class Ocean {
         return ships;
     }
 
-    public void addShip(Ship ship, String coords) {
+    public void placeShipOnBoard(Ship ship, String coords) {
 
         int[] squareLocation = getSquareLocation(coords);
         int x = squareLocation[0];
