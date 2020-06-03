@@ -2,11 +2,13 @@ import java.util.ArrayList;
 
 public class Ocean {
     private ArrayList<ArrayList<Square>> map;
+    private ArrayList<Ship> ships;
     final private int WIDTH = 10;
     final private int HEIGHT = 10;
 
     public Ocean(){
         this.map = new ArrayList<>();
+        this.ships = new ArrayList<>();
         String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
 
         for (int i=0; i<HEIGHT; i++){
@@ -18,6 +20,10 @@ public class Ocean {
                 map.get(i).add(new Square(letter + (i + 1)));
             }
         }
+    }
+
+    public ArrayList<Ship> getShips() {
+        return ships;
     }
 
     public void addShip(Ship ship, String coords) {
