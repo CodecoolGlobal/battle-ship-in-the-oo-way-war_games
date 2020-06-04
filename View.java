@@ -40,15 +40,27 @@ public class View {
     }
 
     void displayGameScreen(ArrayList<ArrayList<Square>> mapOwner,
-                           ArrayList<ArrayList<Square>> mapOpponent){
+                           ArrayList<ArrayList<Square>> mapOpponent,
+                           boolean isTurnOver){
         clearDisplay();
         displayBoard(mapOwner);
-        displayBoard(mapOwner, false, 30);
-        printMessage("Enter coordinates to attack: \n");
-        trimMessageStream(6);
+        displayBoard(mapOpponent, false, 30);
+        if (!isTurnOver) {
+            printMessage("Enter coordinates to attack: \n\n");
+            trimMessageStream(6);
+        } else {
+            printMessage("You've missed! Press enter to end this turn.");
+            trimMessageStream(0);
+        }
+
         printMessageStream();
         System.out.print("\033[12;30H");
     }
+
+    void displayGameScreen(ArrayList<ArrayList<Square>> mapOwner,
+                           ArrayList<ArrayList<Square>> mapOpponent){
+                            displayGameScreen(mapOwner, mapOpponent, false);
+                            }
 
     void displayOptions(ArrayList<String> options){
         int i = 1;
@@ -84,8 +96,14 @@ public class View {
     }
 
     void printMessageStream(){
-        for (String message : messageStream) {
-            System.out.println(message);
+        /**
+         * Prints all messages from messageStream line by line, starting with latest
+         */
+        int i = messageStream.size() - 1;
+        while (i >= 0){
+            System.out.println(messageStream.get(i));
+            i--;
         }
     }
 }
+

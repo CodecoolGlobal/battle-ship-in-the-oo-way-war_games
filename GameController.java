@@ -40,7 +40,7 @@ public class GameController {
         String input;
 
         view.clearDisplay();
-        view.printMessage(playerName + ": Press enter to start turn.");
+        view.printMessage(playerName + ": Press enter to start your turn.");
         scan.nextLine();
 
         while (!isTurnOver){
@@ -55,7 +55,6 @@ public class GameController {
             } else {
                 oceanOppo.getMap().get(coords[0]).get(coords[1]).markHit();
                 if (!oceanOppo.getMap().get(coords[0]).get(coords[1]).hasShip()){
-                    view.messageStream.add("You've missed!");
                     isTurnOver = true;
             } else {
                 oceanOppo.isShipSunk(input);
@@ -70,7 +69,7 @@ public class GameController {
             winner = playerName;
             isTurnOver = true;
         }else if (isTurnOver){
-            view.messageStream.add("Press enter to end this turn.");
+            view.displayGameScreen(oceanOwner.getMap(), oceanOppo.getMap(), true);
             scan.nextLine();
         }
         }
