@@ -26,6 +26,8 @@ public class MenuController {
                 printRules(view);
             } else if (userInput == 3) {
                 gameOn = false;
+            } else if (userInput == 0) {
+                runTestGame();
             }
         }
     }
@@ -70,5 +72,26 @@ public class MenuController {
             System.out.print("Enter any key to return to the main menu ");
             input = scan.next();
         }
+    }
+
+    private static void runTestGame(){
+        Ocean ocean1 = new Ocean();
+        Ship shipA = new Ship("Carrier", "vertical");
+        ocean1.getShips().add(shipA);
+        ocean1.placeShipOnBoard(ocean1.getShips().get(0), "A1");
+        Ship shipB = new Ship("Submarine", "vertical");
+        ocean1.getShips().add(shipB);
+        ocean1.placeShipOnBoard(ocean1.getShips().get(1), "C1");
+
+        Ocean ocean2 = new Ocean();
+        Ship shipC = new Ship("Carrier", "vertical");
+        ocean2.getShips().add(shipC);
+        ocean2.placeShipOnBoard(ocean1.getShips().get(0), "A1");
+        Ship shipD = new Ship("Submarine", "vertical");
+        ocean2.getShips().add(shipD);
+        ocean2.placeShipOnBoard(ocean1.getShips().get(1), "C1");
+
+        GameController game = new GameController(ocean1, ocean2);
+        game.run();
     }
 }

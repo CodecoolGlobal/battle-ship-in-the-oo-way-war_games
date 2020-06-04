@@ -26,7 +26,6 @@ public class GameController {
         view.printMessage("The winner is " + winner + "\n");
         view.printMessage("Press enter to return to main menu.");
         scan.nextLine();
-        // scan.nextLine();
     }
 
     void initialise() {
@@ -43,7 +42,6 @@ public class GameController {
         view.clearDisplay();
         view.printMessage(playerName + ": Press enter to start turn.");
         scan.nextLine();
-        // scan.nextLine();
 
         while (!isTurnOver){
             view.displayGameScreen(oceanOwner.getMap(), oceanOppo.getMap());
@@ -71,9 +69,8 @@ public class GameController {
             isRunning = false;
             winner = playerName;
             isTurnOver = true;
-        }else {
+        }else if (isTurnOver){
             view.messageStream.add("Press enter to end this turn.");
-            scan.nextLine();
             scan.nextLine();
         }
         }
