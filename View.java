@@ -2,7 +2,8 @@
 import java.util.ArrayList;
 
 public class View {
-
+    public static final String RED = "\u001B[31m";
+    public static final String RESET = "\u001B[0m";
     ArrayList<String> messageStream;
 
     public View(){
@@ -28,7 +29,8 @@ public class View {
             }else System.out.print(i + " ");
             
             for (Square square : row) {
-                System.out.print(square.getIconSquare(forOwner) + " ");
+                if (square.hasShip() && square.getShip().getIsSunk()) System.out.print(RED + square.getIconSquare(forOwner) + " " + RESET);
+                else System.out.print(square.getIconSquare(forOwner) + " ");
             }
             System.out.println();
             i++;
