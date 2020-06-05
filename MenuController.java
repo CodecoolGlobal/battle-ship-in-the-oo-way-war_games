@@ -86,10 +86,10 @@ public class MenuController {
         Ocean ocean2 = new Ocean();
         Ship shipC = new Ship("Carrier", "vertical");
         ocean2.getShips().add(shipC);
-        ocean2.placeShipOnBoard(ocean1.getShips().get(0), "B1");
+        ocean2.placeShipOnBoard(ocean2.getShips().get(0), "B1");
         Ship shipD = new Ship("Submarine", "vertical");
         ocean2.getShips().add(shipD);
-        ocean2.placeShipOnBoard(ocean1.getShips().get(1), "D1");
+        ocean2.placeShipOnBoard(ocean2.getShips().get(1), "D1");
 
         GameController game = new GameController(ocean1, ocean2);
         game.run();
