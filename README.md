@@ -2,13 +2,13 @@
 
 ## The story
 Take old time pen&paper classic Battleships to your computer! 
-With this version you both boards will be clearly presented 
-and you will be able to focus on taking out this pesky 2-field
+With this version both boards will always be clearly presented 
+and you will be able to focus on taking out this pesky, 2-field
 little bugger. 
 
 ## Specification
 * Game for 2 players
-* Each player can see his board with all information and opponent's board with unhit ships hidden
+* Each player can see his board with all information and opponent's board with un-hit ships hidden
 * Players place the ships themselves before the game
 * There are 5 ships to be placed: 
     * Carrier (5 holes)
@@ -17,8 +17,9 @@ little bugger.
     * Submarine (3 holes)
     * Destroyer (2 holes)
 * Ships can be placed according to the rules:
-    * Place each ship in any horizontal or vertical position but not diagonally,
-    * Don't place a ship so that any part of it overlaps letters, numbers, the edge of the grid or another ship,
+    * Ship can be in horizontal or vertical position, but not diagonal,
+    * All parts of ship are placed within the map,
+    * Ships can't overlap or be placed next to each other.
 * Players take turns trying to hit opponents ships by guessing coordinates
 * After hitting a ship player continues his turn
 * Players receive messages about the results of their hits
