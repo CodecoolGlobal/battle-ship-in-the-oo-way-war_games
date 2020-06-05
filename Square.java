@@ -42,16 +42,16 @@ public class Square {
         }else return false;
     }
 
-    public String getIconSquare(boolean ownerOcean){
-        if(ownerOcean){
-            if(!hasShip()) return "\u00B7";
-                else if(isMiss) return "-";
-                else if(isHit) return "!";
-                else return "X";
-        }else {
-                if(isHit) return "!";
-                else if(isMiss) return "-";
-                else return "\u00B7";
-        }
+    public String getIconSquare(boolean forOwner){
+        if(!hasShip()) {
+            if(isHit) return "o";
+            else return ".";
+        }else{
+            if(isHit) return "!";
+            else {
+                if(forOwner) return "X";
+                else return ".";
+            }
+        }        
     }
 }
