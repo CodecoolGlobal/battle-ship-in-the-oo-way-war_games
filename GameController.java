@@ -22,9 +22,7 @@ public class GameController {
             if (isRunning) runTurn(ocean2, ocean1, "Player 2");
         }
 
-        view.clearDisplay();
-        view.printMessage("The winner is " + winner + "\n");
-        view.printMessage("Press enter to return to main menu.");
+        view.displayEndScreen(winner, ocean1.getMap(), ocean2.getMap());
         scan.nextLine();
     }
 

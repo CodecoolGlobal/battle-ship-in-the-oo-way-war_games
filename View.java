@@ -107,5 +107,15 @@ public class View {
             i--;
         }
     }
+
+    void displayEndScreen(String winner, 
+                          ArrayList<ArrayList<Square>> mapOwner,
+                          ArrayList<ArrayList<Square>> mapOpponent){
+        clearDisplay();
+        displayBoard(mapOwner);
+        displayBoard(mapOpponent, true, 30);
+        printMessage("\nThe winner is " + winner + "\n");
+        printMessage("Press enter to return to main menu.");
+    }
 }
 
