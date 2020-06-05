@@ -3,12 +3,14 @@ public class Square {
 
     private String coords;
     private boolean isHit;
-    private boolean isMiss;
     private Ship ship;
+    private final String HIT = "፠";
+    private final String MISS = "\uFFEE";
+    private final String EMPTY = "\u00B7";
+    private final String SHIP = "X";
 
     public Square(String coords) {
         this.isHit = false;
-        this.isMiss = false;
         this.coords = coords;
     }
 
@@ -32,26 +34,22 @@ public class Square {
         this.ship = ship;
     }
 
-    public void markMiss(){
-        this.isMiss = true;
-    }
-
     public boolean hasShip(){
         if(this.ship != null){
             return true;
         }else return false;
     }
 
-    public String getIconSquare(boolean forOwner){
-        if(!hasShip()) {
-            if(isHit) return "o";
-            else return ".";
-        }else{
-            if(isHit) return "!";
-            else {
-                if(forOwner) return "X";
-                else return ".";
-            }
-        }        
-    }
+public String getIconSquare(boolean forOwner){
+    if(!hasShip()) {
+        if(isHit) return MISS;
+        else return EMPTY;
+    }else{
+        if(isHit) return HIT;
+        else {
+            if(forOwner) return SHIP;
+            else return EMPTY;
+        }
+    }        
+}
 }
