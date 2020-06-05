@@ -48,15 +48,17 @@ public class View {
         displayBoard(mapOwner);
         displayBoard(mapOpponent, false, 30);
         if (!isTurnOver) {
-            printMessage("Enter coordinates to attack: \n\n");
+            printMessage("\nEnter coordinates to attack: \n\n");
             trimMessageStream(6);
         } else {
-            printMessage("You've missed! Press enter to end this turn.");
+            printMessage("\nYou've missed! Press enter to end this turn.");
             trimMessageStream(0);
         }
 
         printMessageStream();
-        System.out.print("\033[12;30H");
+        if (!isTurnOver) System.out.print("\033[13;30H");
+        else System.out.print("\033[13;45H");
+        
     }
 
     void displayGameScreen(ArrayList<ArrayList<Square>> mapOwner,
