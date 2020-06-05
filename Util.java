@@ -36,8 +36,8 @@ public class Util {
         return input;
     }
 
-    public static void pressAnyKeyToContinue()  { 
-        System.out.println("\nPress enter to continue");
+    public static void pressEnterToContinue(String message)  { 
+        System.out.print(message);
         try {
             System.in.read();
         }

@@ -50,7 +50,7 @@ public class SetupController {
             oceans.add(ocean);
             view.clearDisplay();
             view.displayBoard(ocean.getMap());
-            Util.pressAnyKeyToContinue();
+            Util.pressEnterToContinue("\nPress enter to continue");
         }
 
         return oceans;

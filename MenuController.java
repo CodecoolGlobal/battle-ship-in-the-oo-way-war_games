@@ -67,11 +67,8 @@ public class MenuController {
             System.out.println(rules[index]);
         }
 
-        String input = null;
-        while(input == null){
-            System.out.print("Enter any key to return to the main menu ");
-            input = scan.next();
-        }
+        Util.pressEnterToContinue("Press enter to return to the main menu ");
+        
     }
 
     private static void runTestGame(){
