@@ -14,19 +14,29 @@ public class Ai {
     }
 
     public String getCoordinatesToShoot(Ocean ocean){
-        Random randomGenerator = new Random();
         ArrayList<ArrayList<Square>> map = ocean.getMap();
-        int x = 0;
-        int y = 0;
-        Square square = map.get(x).get(y);
+        ArrayList<Square> targets = new ArrayList<Square>();
+        
+        for (ArrayList<Square> row : map) {
+            for (Square square : row) {
+                if(!square.getIsHit()) square.markIsGoodTarget();
+            }
+        }
 
-        do{
-            x = randomGenerator.nextInt(map.size());
-            y = randomGenerator.nextInt(map.get(x).size());
-            square = map.get(x).get(y);
-            
-        }while(square.getIsHit());
+        for (ArrayList<Square> row : map) {
+            for (Square square : row) {
+                if(square.getIsGoodTarget()) targets.add(square);
+                square.unmarkIsGoodTarget();
+            }
+        }
 
-        return square.getCoords();
+        return drawSquare(targets).getCoords();
+    }
+
+    private Square drawSquare(ArrayList<Square> targets){
+        Random randomGenerator = new Random();
+        int randomIndex = randomGenerator.nextInt(targets.size());
+
+        return targets.get(randomIndex);
     }
 }

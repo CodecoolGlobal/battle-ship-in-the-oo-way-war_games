@@ -3,6 +3,7 @@ public class Square {
 
     private String coords;
     private boolean isHit;
+    private boolean isGoodTarget;
     private Ship ship;
     private final String HIT = "፠";
     private final String MISS = "\uFFEE";
@@ -12,6 +13,19 @@ public class Square {
     public Square(String coords) {
         this.isHit = false;
         this.coords = coords;
+        this.isGoodTarget = false;
+    }
+
+    public boolean getIsGoodTarget(){
+        return this.isGoodTarget;
+    }
+
+    public void markIsGoodTarget(){
+        this.isGoodTarget = true;
+    }
+
+    public void unmarkIsGoodTarget(){
+        this.isGoodTarget = false;
     }
 
     public boolean getIsHit(){
