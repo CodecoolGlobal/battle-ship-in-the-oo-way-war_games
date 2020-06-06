@@ -1,33 +1,43 @@
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class GameController {
     private Ocean ocean1;
     private String playerOneName;
+    private Ai computer1;
     private Ocean ocean2;
     private String playerTwoName;
+    private Ai computer2;
     private String coordsPattern = "[a-jA-J][1-9][0]*";
     private Scanner scan;
     private View view;
     private boolean isRunning = true;
     private String winner;
 
-    public GameController(Ocean ocean1, String player1, Ocean ocean2, String player2){
+    public GameController(Ocean ocean1, String player1, Ocean ocean2, String player2) {
         this.ocean1 = ocean1;
         this.ocean2 = ocean2;
         this.playerOneName = player1;
         this.playerTwoName = player2;
+        if (player1.equals("easy")) {
+            this.computer1 = new Ai(player1);
+        }
+        if (player1.equals("easy")) {
+            this.computer2 = new Ai(player2);
+        }
     }
 
-    public GameController(Ocean ocean1, Ocean ocean2){
+    public GameController(Ocean ocean1, Ocean ocean2) {
         this(ocean1, "Player 1", ocean2, "Player 2");
     }
 
     public void run() {
         initialise();
 
-        while (this.isRunning){
-            runTurn(ocean1, ocean2, playerOneName);
-            if (isRunning) runTurn(ocean2, ocean1, playerTwoName);
+        while (this.isRunning) {
+            runTurn(ocean1, ocean2, true);
+            if (isRunning)
+                runTurn(ocean2, ocean1, false);
         }
 
         view.displayEndScreen(winner, ocean1.getMap(), ocean2.getMap());
@@ -39,19 +49,28 @@ public class GameController {
         view = new View();
     }
 
-    void runTurn(Ocean oceanOwner,
-                 Ocean oceanOppo,
-                 String playerName){
+    void runTurn(Ocean oceanOwner, Ocean oceanOppo, boolean isP1Turn) {
         boolean isTurnOver = false;
         String input;
+        String playerName;
+        if (isP1Turn)
+            playerName = playerOneName;
+        else
+            playerName = playerTwoName;
 
         view.clearDisplay();
         view.printMessage(playerName + ": Press enter to start your turn.");
         scan.nextLine();
 
-        while (!isTurnOver){
+        while (!isTurnOver) {
             view.displayGameScreen(oceanOwner.getMap(), oceanOppo.getMap());
-            input = scan.nextLine(); 
+            if (computer1 != null && computer2 != null)
+                try {
+                    TimeUnit.MILLISECONDS.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            input = getTarget(oceanOppo, isP1Turn);
             if (!input.matches(this.coordsPattern)) {
                 view.messageStream.add("Please enter valid coordinates (example: B5).");
             } else {
@@ -80,5 +99,15 @@ public class GameController {
         }
         }
 
+    }
+
+    private String getTarget(Ocean targetOcean, boolean isP1Turn){
+        String target;
+        if (isP1Turn && computer1 != null){
+            target = computer1.getCoordinatesToShoot();
+        } else if (!isP1Turn && computer2 != null){
+            target = computer2.getCoordinatesToShoot();
+        }else target = scan.nextLine();
+        return target;
     }
 }
