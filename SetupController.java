@@ -5,10 +5,10 @@ import java.util.Map;
 
 public class SetupController {
 
-    public static List<Ocean> run() {
+    public static List<Ocean> run(String player1, String player2) {
 
         List<Ocean> oceans = new ArrayList<>();
-        String[] players = {"Player 1", "Player 2"};
+        String[] players = {player1, player2};
         View view = new View();
         Map<String, String> shipsDict = Util.createShipsDict();
 
@@ -19,40 +19,47 @@ public class SetupController {
 
         for (int i = 0; i < players.length; i++) {
             int counter = 0;
-            Ocean ocean = new Ocean();
-            for (String key: shipsDict.keySet()) {                
-    
+            
+
+            if (players[i].equals("easy") || players[i].equals("medium") || players[i].equals("hard")) {
+                Ocean ocean  = Util.aiPlaceShipsOnBoard();
+                oceans.add(ocean);                
+            } else {
+                Ocean ocean = new Ocean();
+                for (String key: shipsDict.keySet()) {                
+        
+                    view.clearDisplay();
+                    view.displayBoard(ocean.getMap());
+        
+                    boolean validInput = false;
+        
+                    while (!validInput) {
+                        view.printMessage("\n" + players[i] + ": enter " + key + " coordinates (" + shipsDict.get(key) + "): ");
+                        coords = Util.validateUserInput(coordsPattern, coords, "Enter valid coordinates: ");
+        
+                        view.printMessage("Is horizontal? [Y/N]: ");
+                        position = Util.validateUserInput(positionPattern, position, "Type Y or N: ");            
+                        position = Util.getPositionFromInput(position);
+                        Ship ship = new Ship(key, position);
+        
+                        if (ocean.checkIfWithinBounds(ship, coords) && ocean.checkIfSpaceFreeForShip(ship, coords)) {
+                            ocean.getShips().add(ship);
+                            validInput = true;
+                        } else {
+                            System.out.println("Ships cannot be placed outside the board, they cannot overlap or touch");
+                        }
+                    }
+        
+                    ocean.placeShipOnBoard(ocean.getShips().get(counter), coords);         
+                    counter++;
+                }
+                oceans.add(ocean);
                 view.clearDisplay();
                 view.displayBoard(ocean.getMap());
-    
-                boolean validInput = false;
-    
-                while (!validInput) {
-                    view.printMessage("\n" + players[i] + ": enter " + key + " coordinates (" + shipsDict.get(key) + "): ");
-                    coords = Util.validateUserInput(coordsPattern, coords, "Enter valid coordinates: ");
-    
-                    view.printMessage("Is horizontal? [Y/N]: ");
-                    position = Util.validateUserInput(positionPattern, position, "Type Y or N: ");            
-                    position = Util.getPositionFromInput(position);
-                    Ship ship = new Ship(key, position);
-    
-                    if (ocean.checkIfWithinBounds(ship, coords) && ocean.checkIfSpaceFreeForShip(ship, coords)) {
-                        ocean.getShips().add(ship);
-                        validInput = true;
-                    } else {
-                        System.out.println("Ships cannot be placed outside the board, they cannot overlap or touch");
-                    }
-                }
-    
-                ocean.placeShipOnBoard(ocean.getShips().get(counter), coords);         
-                counter++;
+                Util.pressEnterToContinue("\nPress enter to continue ");
             }
-            oceans.add(ocean);
-            view.clearDisplay();
-            view.displayBoard(ocean.getMap());
-            Util.pressEnterToContinue("\nPress enter to continue");
         }
-
+        
         return oceans;
     }
 }
