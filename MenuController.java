@@ -2,12 +2,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class MenuController {
-
+    private static View view = new View();
     private static Scanner scan = new Scanner(System.in);
 
     public static void menu() {
-        View view = new View();
-        
         boolean gameOn = true;
 
         while(gameOn){
@@ -19,8 +17,15 @@ public class MenuController {
             
 
             if (userInput == 1) {
+                view.clearDisplay();
+                System.out.print("Enter name of player one: ");
+                scan.nextLine();
+                String playerOneName = scan.nextLine();
+                view.clearDisplay();
+                System.out.print("Enter name of player two: ");
+                String playerTwoName = scan.nextLine();
                 List<Ocean> oceans = SetupController.run();
-                GameController game = new GameController(oceans.get(0), oceans.get(1));
+                GameController game = new GameController(oceans.get(0), playerOneName, oceans.get(1), playerTwoName);
                 game.run();
             } else if (userInput == 2) {
                 printRules(view);
@@ -72,6 +77,14 @@ public class MenuController {
     }
 
     private static void runTestGame(){
+        view.clearDisplay();
+        System.out.print("Enter name of player one: ");
+        scan.nextLine();
+        String playerOneName = scan.nextLine();
+        view.clearDisplay();
+        System.out.print("Enter name of player two: ");
+        String playerTwoName = scan.nextLine();
+
         Ocean ocean1 = new Ocean();
         Ship shipA = new Ship("Carrier", "vertical");
         ocean1.getShips().add(shipA);
@@ -88,7 +101,7 @@ public class MenuController {
         ocean2.getShips().add(shipD);
         ocean2.placeShipOnBoard(ocean2.getShips().get(1), "D1");
 
-        GameController game = new GameController(ocean1, "easy", ocean2, "easy");
+        GameController game = new GameController(ocean1, playerOneName, ocean2, playerTwoName);
         game.run();
     }
 }
