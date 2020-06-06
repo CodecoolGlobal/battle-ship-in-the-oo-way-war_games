@@ -20,10 +20,10 @@ public class GameController {
         this.ocean2 = ocean2;
         this.playerOneName = player1;
         this.playerTwoName = player2;
-        if (player1.equals("easy")) {
+        if (player1.equals("easy") || player1.equals("medium")) {
             this.computer1 = new Ai(player1);
         }
-        if (player2.equals("easy")) {
+        if (player2.equals("easy") || player2.equals("medium") ) {
             this.computer2 = new Ai(player2);
         }
     }
