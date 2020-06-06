@@ -15,7 +15,6 @@ public class MenuController {
             System.out.print("Choose one of the options: ");
             int userInput = getUserInput();
             
-
             if (userInput == 1) {
                 view.clearDisplay();
                 System.out.print("Enter name of player one: ");
@@ -24,7 +23,7 @@ public class MenuController {
                 view.clearDisplay();
                 System.out.print("Enter name of player two: ");
                 String playerTwoName = scan.nextLine();
-                List<Ocean> oceans = SetupController.run();
+                List<Ocean> oceans = SetupController.run(playerOneName, playerTwoName);
                 GameController game = new GameController(oceans.get(0), playerOneName, oceans.get(1), playerTwoName);
                 game.run();
             } else if (userInput == 2) {
