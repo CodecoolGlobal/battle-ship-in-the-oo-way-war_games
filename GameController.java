@@ -2,24 +2,32 @@ import java.util.Scanner;
 
 public class GameController {
     private Ocean ocean1;
+    private String playerOneName;
     private Ocean ocean2;
+    private String playerTwoName;
     private String coordsPattern = "[a-jA-J][1-9][0]*";
     private Scanner scan;
     private View view;
     private boolean isRunning = true;
     private String winner;
 
-    public GameController(Ocean ocean1, Ocean ocean2){
+    public GameController(Ocean ocean1, String player1, Ocean ocean2, String player2){
         this.ocean1 = ocean1;
         this.ocean2 = ocean2;
+        this.playerOneName = player1;
+        this.playerTwoName = player2;
+    }
+
+    public GameController(Ocean ocean1, Ocean ocean2){
+        this(ocean1, "Player 1", ocean2, "Player 2");
     }
 
     public void run() {
         initialise();
 
         while (this.isRunning){
-            runTurn(ocean1, ocean2, "Player 1");
-            if (isRunning) runTurn(ocean2, ocean1, "Player 2");
+            runTurn(ocean1, ocean2, playerOneName);
+            if (isRunning) runTurn(ocean2, ocean1, playerTwoName);
         }
 
         view.displayEndScreen(winner, ocean1.getMap(), ocean2.getMap());
