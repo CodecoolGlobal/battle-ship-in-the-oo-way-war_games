@@ -16,6 +16,28 @@ public class Ai {
     public String getCoordinatesToShoot(Ocean ocean){
         ArrayList<ArrayList<Square>> map = ocean.getMap();
         ArrayList<Square> targets = new ArrayList<Square>();
+
+        if(difficultyLevel.equals("medium")){
+            for (ArrayList<Square> row : map) {
+                for (Square square : row) {
+                    if(square.getIsHit() && !square.getShip().getIsSunk()) {
+                        ArrayList<Square> neighbours = getNeighbourSquares(ocean, square);
+                        if(!neighbourIsHit(neighbours)) {
+                            for (Square neighbour : neighbours) {
+                                if(!neighbour.getIsHit()) neighbour.markIsGoodTarget();
+                            }
+                        }else {
+                            if(isTargetHorizontal(square, ocean)) {
+                                do{
+                                    // oznaczanie celów
+                                }while();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         if(difficultyLevel.equals("easy") || !hasTargets(map)){
             for (ArrayList<Square> row : map) {
                 for (Square square : row) {
@@ -74,5 +96,19 @@ public class Ai {
         if((coord[1] + 1) <= 9) neighbours.add(ocean.getMap().get(coord[0]).get(coord[1] + 1));
         
         return neighbours;
+    }
+
+    private boolean neighbourIsHit(ArrayList<Square> neighbours){
+        for (Square square : neighbours) {
+            if(square.hasShip() && square.getIsHit()) return true;
+        }
+        return false;
+    }
+
+    private boolean isTargetHorizontal(Square square, Ocean ocean){
+        int[] coord = ocean.getSquareLocation(square.getCoords());
+        if((coord[1] + 1) <= 9 && ocean.getMap().get(coord[0]).get(coord[1] + 1).hasShip()) return true;
+        else if((coord[1] - 1) >= 0 && ocean.getMap().get(coord[0]).get(coord[1] - 1).hasShip()) return true;
+        return false;
     }
 }
