@@ -60,7 +60,7 @@ public class Ai {
 
     private boolean hasSunkNeighbour(Ocean ocean, Square square){
         for (Square neighbour : getNeighbourSquares(ocean, square)) {
-            if(neighbour.getShip().getIsSunk()) return true;
+            if(neighbour.getShip() != null && neighbour.getShip().getIsSunk()) return true;
         }
         return false;
     }
