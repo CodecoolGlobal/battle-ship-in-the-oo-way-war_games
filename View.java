@@ -1,8 +1,11 @@
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class View {
+    private final static int SIM_PERIOD = 300;
     public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
     public static final String RESET = "\u001B[0m";
     ArrayList<String> messageStream;
 
@@ -119,5 +122,36 @@ public class View {
         printMessage("\nThe winner is " + winner + "\n");
         printMessage("Press enter to return to main menu.");
     }
-}
 
+    void displaySimScreen(ArrayList<ArrayList<Square>> mapP1,
+                          ArrayList<ArrayList<Square>> mapP2){
+                            clearDisplay();
+                            displayBoardSim(mapP1, true, 0);
+                            displayBoardSim(mapP2, true, 30);
+                            try {
+                                TimeUnit.MILLISECONDS.sleep(SIM_PERIOD);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            }
+
+    void displayBoardSim(ArrayList<ArrayList<Square>> map, boolean forOwner, int offset){
+        System.out.print("\033[0;" + offset + "H");
+        System.out.println("   A B C D E F G H I J");
+        int i = 1;
+        for (ArrayList<Square> row : map) {
+            System.out.print("\033[" + (i+1) + ";" + offset + "H");
+            if (i < 10){
+                System.out.print(" " + i + " ");
+            }else System.out.print(i + " ");
+            
+            for (Square square : row) {
+                if (square.hasShip() && square.getShip().getIsSunk()) System.out.print(RED + square.getIconSquare(forOwner) + " " + RESET);
+                else if (square.getIsGoodTarget()) System.out.print(GREEN + square.getIconSquare(forOwner) + " " + RESET);
+                else System.out.print(square.getIconSquare(forOwner) + " ");
+            }
+            System.out.println();
+            i++;
+        }
+    }
+}

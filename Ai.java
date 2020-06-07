@@ -17,6 +17,12 @@ public class Ai {
         ArrayList<ArrayList<Square>> map = ocean.getMap();
         ArrayList<Square> targets = new ArrayList<Square>();
 
+        for (ArrayList<Square> row : map) {
+            for (Square square : row) {
+                square.unmarkIsGoodTarget();
+            }
+        }
+
         if(difficultyLevel.equals("medium")){
             for (ArrayList<Square> row : map) {
                 for (Square square : row) {
@@ -99,7 +105,6 @@ public class Ai {
         for (ArrayList<Square> row : map) {
             for (Square square : row) {
                 if(square.getIsGoodTarget()) targets.add(square);
-                square.unmarkIsGoodTarget();
             }
         }
 

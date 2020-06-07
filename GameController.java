@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class GameController {
     private Ocean ocean1;
@@ -13,7 +12,6 @@ public class GameController {
     private View view;
     private boolean isRunning = true;
     private String winner;
-    private final static int SIM_PERIOD = 200;
 
     public GameController(Ocean ocean1, String player1, Ocean ocean2, String player2) {
         this.ocean1 = ocean1;
@@ -59,22 +57,22 @@ public class GameController {
         else
             playerName = playerTwoName;
 
-        if (!isAiTurn(isP1Turn)){  
+        if (!isAiTurn(isP1Turn) && (computer1 == null && computer2 == null)){  
             view.clearDisplay();
             view.printMessage(playerName + ": Press enter to start your turn.");
             scan.nextLine();
         }
 
         while (!isTurnOver) {
-            if (isSimulation() && !isP1Turn) view.displayGameScreen(oceanOppo.getMap(), oceanOwner.getMap());
+            if (isSimulation() && isP1Turn) view.displaySimScreen(oceanOwner.getMap(), oceanOppo.getMap());
+            else if (isSimulation() && !isP1Turn)  view.displaySimScreen(oceanOppo.getMap(), oceanOwner.getMap());
             else view.displayGameScreen(oceanOwner.getMap(), oceanOppo.getMap());
-            if (computer1 != null && computer2 != null)
-                try {
-                    TimeUnit.MILLISECONDS.sleep(SIM_PERIOD);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
             input = getTarget(oceanOppo, isP1Turn);
+
+            if (isSimulation() && isP1Turn) view.displaySimScreen(oceanOwner.getMap(), oceanOppo.getMap());
+            else if (isSimulation() && !isP1Turn)  view.displaySimScreen(oceanOppo.getMap(), oceanOwner.getMap());
+
             if (!input.matches(this.coordsPattern)) {
                 view.messageStream.add("Please enter valid coordinates (example: B5).");
             } else {
@@ -104,7 +102,6 @@ public class GameController {
             }
         }
         }
-
     }
 
     private String getTarget(Ocean targetOcean, boolean isP1Turn){
