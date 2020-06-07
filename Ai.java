@@ -35,14 +35,14 @@ public class Ai {
 
                                 while(!isLeftCheck && !isRightCheck) {
                                     if(!isLeftCheck) {
-                                        if(coord[1] - i >= 0) isLeftCheck = true;
+                                        if(coord[1] - i < 0) isLeftCheck = true;
                                         else if(!ocean.getMap().get(coord[0]).get(coord[1] - i).getIsHit()){
                                             ocean.getMap().get(coord[0]).get(coord[1] - i).markIsGoodTarget();
                                             isLeftCheck = true;
                                         }
                                     }
                                     if(!isRightCheck){
-                                        if(coord[1] + i <= 9) isRightCheck = true;
+                                        if(coord[1] + i > 9) isRightCheck = true;
                                         else if(!ocean.getMap().get(coord[0]).get(coord[1] + i).getIsHit()){
                                             ocean.getMap().get(coord[0]).get(coord[1] + i).markIsGoodTarget();
                                             isRightCheck = true;
@@ -58,7 +58,7 @@ public class Ai {
 
                                 while(!isUpCheck && !isDownCheck){
                                     if(!isUpCheck) {
-                                        if((coord[0] - i) >= 0) isUpCheck = true;
+                                        if((coord[0] - i) < 0) isUpCheck = true;
                                         else if(!ocean.getMap().get(coord[0] - i).get(coord[1]).getIsHit()){
                                             ocean.getMap().get(coord[0] - i).get(coord[1]).markIsGoodTarget();
                                             isUpCheck = true;
@@ -66,7 +66,7 @@ public class Ai {
                                     }
 
                                     if(!isDownCheck) {
-                                        if(coord[0] + i <= 9) isDownCheck = true;
+                                        if(coord[0] + i > 9) isDownCheck = true;
                                         else if(!ocean.getMap().get(coord[0] + i).get(coord[1]).getIsHit()){
                                             ocean.getMap().get(coord[0] + i).get(coord[1]).markIsGoodTarget();
                                             isDownCheck = true;
