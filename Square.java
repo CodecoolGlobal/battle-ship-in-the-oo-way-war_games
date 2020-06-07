@@ -6,8 +6,8 @@ public class Square {
     private boolean isGoodTarget;
     private Ship ship;
     private final String HIT = "፠";
-    private final String MISS = "\uFFEE";
-    private final String EMPTY = "\u00B7";
+    private final String MISS = "\u25CF";
+    private final String EMPTY = "\uFFEE";
     private final String SHIP = "X";
 
     public Square(String coords) {
