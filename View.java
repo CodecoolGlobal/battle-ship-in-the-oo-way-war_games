@@ -52,11 +52,11 @@ public class View {
         displayBoard(mapOpponent, false, 30);
         if (!isTurnOver) {
             printMessage("\nEnter coordinates to attack: \n\n");
-            trimMessageStream(6);
         } else {
-            printMessage("\nYou've missed! Press enter to end this turn.");
-            trimMessageStream(0);
+            printMessage("\nPress enter to end this turn.\n\n");
         }
+        trimMessageStream(6);
+
 
         printMessageStream();
         if (!isTurnOver) System.out.print("\033[13;30H");
@@ -128,6 +128,9 @@ public class View {
                             clearDisplay();
                             displayBoardSim(mapP1, true, 0);
                             displayBoardSim(mapP2, true, 30);
+                            System.out.println();
+                            trimMessageStream(6);
+                            printMessageStream();
                             try {
                                 TimeUnit.MILLISECONDS.sleep(SIM_PERIOD);
                             } catch (InterruptedException e) {

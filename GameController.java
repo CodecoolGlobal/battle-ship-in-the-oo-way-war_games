@@ -81,8 +81,10 @@ public class GameController {
                     view.messageStream.add("You've already hit this square!");
             } else {
                 oceanOppo.getMap().get(coords[0]).get(coords[1]).markHit();
+                
                 if (!oceanOppo.getMap().get(coords[0]).get(coords[1]).hasShip()){
                     isTurnOver = true;
+                    view.messageStream.add(playerName + " has hit the " + input + " and it's a miss.");
             } else {
                 oceanOppo.isShipSunk(input);
                 if (oceanOppo.getMap().get(coords[0]).get(coords[1]).getShip().getIsSunk()){
