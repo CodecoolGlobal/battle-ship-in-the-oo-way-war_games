@@ -66,7 +66,8 @@ public class GameController {
         }
 
         while (!isTurnOver) {
-            view.displayGameScreen(oceanOwner.getMap(), oceanOppo.getMap());
+            if (isSimulation() && !isP1Turn) view.displayGameScreen(oceanOppo.getMap(), oceanOwner.getMap());
+            else view.displayGameScreen(oceanOwner.getMap(), oceanOppo.getMap());
             if (computer1 != null && computer2 != null)
                 try {
                     TimeUnit.MILLISECONDS.sleep(SIM_PERIOD);
@@ -87,8 +88,8 @@ public class GameController {
             } else {
                 oceanOppo.isShipSunk(input);
                 if (oceanOppo.getMap().get(coords[0]).get(coords[1]).getShip().getIsSunk()){
-                    view.messageStream.add("You've sunk a " + oceanOppo.getMap().get(coords[0]).get(coords[1]).getShip().getShipName() + "!");
-                } else view.messageStream.add("You've hit a " + oceanOppo.getMap().get(coords[0]).get(coords[1]).getShip().getShipName() + "!");
+                    view.messageStream.add(playerName + " has sunk the " + oceanOppo.getMap().get(coords[0]).get(coords[1]).getShip().getShipName() + "!");
+                } else view.messageStream.add(playerName + " has hit the " + oceanOppo.getMap().get(coords[0]).get(coords[1]).getShip().getShipName() + "!");
             }
             }
             }
@@ -120,5 +121,10 @@ public class GameController {
         boolean result = false;
         if ((isP1Turn && computer1 != null) || (!isP1Turn && computer2 != null)) result = true;
         return result;
+    }
+
+    private boolean isSimulation(){
+        if (!(computer1 == null) && !(computer2 == null)) return true;
+        return false;
     }
 }
