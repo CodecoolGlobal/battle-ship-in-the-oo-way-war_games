@@ -8,7 +8,6 @@ public class Util {
 
     private static Scanner scan = new Scanner(System.in);
 
-
     public static Map<String, String> createShipsDict() {
         Map<String, String> shipsDict = new LinkedHashMap<>();
         String[] shipTypes = {"Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
@@ -52,6 +51,7 @@ public class Util {
         Map<String, String> shipsDict = createShipsDict();
         Ocean ocean = new Ocean();
         View view = new View();
+        Random random = new Random();
         view.clearDisplay();
         view.displayBoard(ocean.getMap());
         int counter = 0;
@@ -60,9 +60,9 @@ public class Util {
 
             String[] letters = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
             String[] choicePosition = {"horizontal", "vertical"};
-            Random random = new Random();
+            
             String letter = letters[random.nextInt(letters.length - 1)];
-            int number = getRandomNumberUsingNextInt(1, 10);
+            int number = getRandomNumberFromRange(1, 10);
             String position = choicePosition[random.nextInt(2)];
             Ship ship = new Ship(key, position);
             String coords = letter + number;
@@ -73,20 +73,20 @@ public class Util {
                     ocean.placeShipOnBoard(ocean.getShips().get(counter), coords);   
                     view.clearDisplay();
                     view.displayBoard(ocean.getMap());
-                    counter ++;
+                    counter++;
                     validCoords = true;
                 } else {
                     letter = letters[random.nextInt(letters.length - 1)];
-                    number = getRandomNumberUsingNextInt(1, 10);
+                    number = getRandomNumberFromRange(1, 10);
                     coords = letter + number;
                 }
             }
         }
-        Util.pressEnterToContinue("\nPress enter to continue ");
+
         return ocean;
     }
 
-    public static int getRandomNumberUsingNextInt(int min, int max) {
+    public static int getRandomNumberFromRange(int min, int max) {
         Random random = new Random();
         return random.nextInt(max - min) + min;
     }
