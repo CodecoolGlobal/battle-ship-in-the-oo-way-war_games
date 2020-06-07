@@ -20,7 +20,7 @@ public class Ai {
         if(difficultyLevel.equals("medium")){
             for (ArrayList<Square> row : map) {
                 for (Square square : row) {
-                    if(square.getIsHit() && !square.getShip().getIsSunk()) {
+                    if(square.getIsHit() && square.hasShip() && !square.getShip().getIsSunk()) {
                         ArrayList<Square> neighbours = getNeighbourSquares(ocean, square);
                         if(!neighbourIsHit(neighbours)) {
                             for (Square neighbour : neighbours) {
@@ -79,7 +79,7 @@ public class Ai {
                     }
                 }
             }
-
+        }
         if(difficultyLevel.equals("easy") || !hasTargets(map)){
             for (ArrayList<Square> row : map) {
                 for (Square square : row) {
