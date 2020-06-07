@@ -28,15 +28,57 @@ public class Ai {
                             }
                         }else {
                             if(isTargetHorizontal(square, ocean)) {
-                                do{
-                                    // oznaczanie celów
-                                }while();
+                                boolean isLeftCheck = false;
+                                boolean isRightCheck = false;
+                                int i = 1;
+                                int[] coord = ocean.getSquareLocation(square.getCoords());
+
+                                while(!isLeftCheck && !isRightCheck) {
+                                    if(!isLeftCheck) {
+                                        if(coord[1] - i >= 0) isLeftCheck = true;
+                                        else if(!ocean.getMap().get(coord[0]).get(coord[1] - i).getIsHit()){
+                                            ocean.getMap().get(coord[0]).get(coord[1] - i).markIsGoodTarget();
+                                            isLeftCheck = true;
+                                        }
+                                    }
+                                    if(!isRightCheck){
+                                        if(coord[1] + i <= 9) isRightCheck = true;
+                                        else if(!ocean.getMap().get(coord[0]).get(coord[1] + i).getIsHit()){
+                                            ocean.getMap().get(coord[0]).get(coord[1] + i).markIsGoodTarget();
+                                            isRightCheck = true;
+                                        }
+                                    }
+                                    i++;
+                                }
+                            }else{
+                                boolean isUpCheck = false;
+                                boolean isDownCheck = false;
+                                int i = 1;
+                                int[] coord = ocean.getSquareLocation(square.getCoords());
+
+                                while(!isUpCheck && !isDownCheck){
+                                    if(!isUpCheck) {
+                                        if((coord[0] - i) >= 0) isUpCheck = true;
+                                        else if(!ocean.getMap().get(coord[0] - i).get(coord[1]).getIsHit()){
+                                            ocean.getMap().get(coord[0] - i).get(coord[1]).markIsGoodTarget();
+                                            isUpCheck = true;
+                                        }
+                                    }
+
+                                    if(!isDownCheck) {
+                                        if(coord[0] + i <= 9) isDownCheck = true;
+                                        else if(!ocean.getMap().get(coord[0] + i).get(coord[1]).getIsHit()){
+                                            ocean.getMap().get(coord[0] + i).get(coord[1]).markIsGoodTarget();
+                                            isDownCheck = true;
+                                        }
+                                    }   
+                                    i++;
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
         if(difficultyLevel.equals("easy") || !hasTargets(map)){
             for (ArrayList<Square> row : map) {
